@@ -1,0 +1,55 @@
+@extends('layouts.app')
+
+@section('content')
+
+<div class="container">
+
+	<div class="row">
+		<div class="col-md-10 col-md-offset-1">
+			<table id="adminListResidents" class="table table-bordered table-striped">
+				<thead>
+					<tr>
+						<td>Resident Image</td>
+						<td>Name</td>
+						<td>Address</td>
+						<td>Mobile Number</td>
+						<td>Home Number</td>
+					</tr>
+				</thead>
+				<tbody>
+					@foreach($residents as $resident)
+						
+						<tr>
+							<td><a href="/adminviewprofile/{{$resident->id}}"></a></td>
+							<td><a href="/adminviewprofile/{{$resident->id}}">{{ $resident->name_first }} {{ $resident->name_middle }} {{ $resident->name_last }}</a></td>
+							<td><a href="/adminviewprofile/{{$resident->id}}">{{ $resident->address }}</a></td>
+							<td><a href="/adminviewprofile/{{$resident->id}}">{{ $resident->number_mobile }}</a></td>
+							<td><a href="/adminviewprofile/{{$resident->id}}">{{ $resident->number_home }}</a></td>
+						</tr>
+						
+					@endforeach
+				</tbody>
+				<tfoot>
+					<tr>
+						<td>Resident Image</td>
+						<td>Name</td>
+						<td>Address</td>
+						<td>Mobile Number</td>
+						<td>Home Number</td>
+					</tr>
+				</tfoot>
+			</table>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-2 col-md-offset-5">
+			@for ($ctr = 0; $ctr < $total; $ctr++)
+				<a href="/listprofiles/{{ $ctr }}"><button class="btn btn-default">{{ $ctr + 1 }}</button></a>
+			@endfor
+		</div>
+	</div>
+
+</div>
+
+@endsection
