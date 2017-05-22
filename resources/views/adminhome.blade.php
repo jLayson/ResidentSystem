@@ -22,6 +22,7 @@
             <a href="{{ url('/listnotifications/0') }}"><p>List All Notifications</p></a>
             <a href="{{ url('/listpending/0') }}"><p>List All Pending Notifications</p></a>
             <a href="{{ url('/listreports/0') }}"><p>List All Reports</p></a>
+            <a href="{{ url('/guestform') }}"><p>Guest Registration Form</p></a>
     	</div>
     </div>
 </div>

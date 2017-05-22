@@ -59,3 +59,6 @@ Route::get('/verifynotification/{id}', 'VisitorNotificationController@adminVerif
 
 //Admin /report actions
 Route::get('/listreports/{offset}', 'ReportController@adminListReports');
+
+//Admin /guest actions
+Route::get('/guestform', 'GuestController@addGuestForm');
