@@ -22,9 +22,23 @@ class GuestController extends Controller
 		$data = $request->input();
 		unset($data['_token']);
 
+		$data['name'] = $data['name_first'] . " " . $data['name_middle'] . " " . $data['name_last'];
+
+		unset($data['name_first']);
+		unset($data['name_middle']);
+		unset($data['name_last']);
+
 		$guest = Guest::insert($data);
 
-		return view('');
+		return redirect('listguests/0');
+	}
+
+	public function updateGuestDeparture($id){
+
+	}
+
+	public function editGuestDetails($id){
+		
 	}
 
 	public function listGuestRecord($offset){
@@ -35,7 +49,7 @@ class GuestController extends Controller
 
 		$total = ceil(count($guests)/20);
 
-		return view('')->with('guests', $guests)->with('total', $total);
+		return view('adminlistguests')->with('guests', $guests)->with('total', $total);
 	}
 
 }

@@ -8,7 +8,7 @@ class Guest extends Model
 {
     protected $table = 'guests';
 
-    protected $fillable [
-    	'name', 'reason', 'vehicle_plate', 'person_to_visit', 'has_sticker',
-    ]
+    protected $fillable = [
+    	'name', 'reason', 'vehicle_plate', 'person_to_visit', 'has_sticker', 'time_departed', 'created_at',
+    ];
 }

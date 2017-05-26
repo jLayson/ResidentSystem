@@ -20,6 +20,7 @@ class CreateGuestsTable extends Migration
             $table->integer('person_to_visit');
             $table->boolean('has_sticker');
             $table->string('vehicle_plate')->nullable();
+            $table->dateTime('time_departed')->nullable();
             $table->timestamps();
         });
     }

@@ -8,7 +8,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Edit Profile</div>
                 <div class="panel-body">
-                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/editprofile') }}">
+                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/addguest') }}">
                         {{ csrf_field() }}
 
                         <div class="form-group">
@@ -46,6 +46,13 @@
                                 @endif
                             </div>
 
+                        </div>
+
+                        <div class="form-group">
+                            <label for="reason" class="col-md-4 control-label">Reason for Visit</label>
+                            <div class="col-md-6">
+                                <textarea  id="reason" type="text" class="form-control" name="reason" required autofocus></textarea>
+                            </div>
                         </div>
 
                         <div class="form-group">

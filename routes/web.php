@@ -62,3 +62,5 @@ Route::get('/listreports/{offset}', 'ReportController@adminListReports');
 
 //Admin /guest actions
 Route::get('/guestform', 'GuestController@addGuestForm');
+Route::post('/addguest', 'GuestController@addGuestRecord');
+Route::get('/listguests/{offset}', 'GuestController@listGuestRecord');
