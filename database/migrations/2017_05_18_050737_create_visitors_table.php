@@ -21,6 +21,7 @@ class CreateVisitorsTable extends Migration
             $table->string('visitor_code');
             $table->dateTime('time_expected');
             $table->dateTime('time_arrived');
+            $table->boolean('is_active')->default(1);
             $table->timestamps();
         });
     }

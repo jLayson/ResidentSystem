@@ -70,7 +70,7 @@
 			<p>Are you sure you want to delete this entry?</p>
 		</div>
     	<div class="modal-footer">
-    		<a href="{{ url('/editnotification/id=') . $id }}"><button type="button" class="btn btn-default">Yes</button></a>
+    		<a href="{{ url('/deletenotification') . '/' . $id }}"><button type="button" class="btn btn-default">Yes</button></a>
 			<button type="button" class="btn btn-default" data-dismiss="modal">No</button>
     	</div>
     </div>

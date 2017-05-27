@@ -64,3 +64,4 @@ Route::get('/listreports/{offset}', 'ReportController@adminListReports');
 Route::get('/guestform', 'GuestController@addGuestForm');
 Route::post('/addguest', 'GuestController@addGuestRecord');
 Route::get('/listguests/{offset}', 'GuestController@listGuestRecord');
+Route::get('/guestdeparture/{id}', 'GuestController@updateGuestDeparture');

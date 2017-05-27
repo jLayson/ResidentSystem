@@ -21,6 +21,7 @@ class CreateGuestsTable extends Migration
             $table->boolean('has_sticker');
             $table->string('vehicle_plate')->nullable();
             $table->dateTime('time_departed')->nullable();
+            $table->boolean('is_active')->default(1);
             $table->timestamps();
         });
     }
