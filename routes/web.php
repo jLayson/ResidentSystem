@@ -64,3 +64,12 @@ Route::get('/listreports/{offset}', 'ReportController@adminListReports');
 Route::get('/guestform', 'GuestController@addGuestForm');
 Route::post('/addguest', 'GuestController@addGuestRecord');
 Route::get('/listguests/{offset}', 'GuestController@listGuestRecord');
+
+//PDF Export /resident
+Route::get('/export/resident', 'PdfExportController@residentExport');
+
+//PDF Export /report
+Route::get('/export/report', 'PdfExportController@reportExport');
+
+//PDF Export /Visitor Notification
+Route::get('/export/visitor/notification', 'PdfExportController@visitorNotifExport');

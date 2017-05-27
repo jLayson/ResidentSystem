@@ -9,6 +9,6 @@ class Report extends Model
     protected $table = "reports";
 
     protected $fillable = [
-    	'report_nature', 'description', 'submitted_by',
+    	'report_nature', 'description', 'submitted_by', 'location',
     ];
 }

@@ -15,7 +15,7 @@ class CreateVehicleStickerTable extends Migration
     {
         Schema::create('vehicle_sticker', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('sticker_number')
+            $table->integer('sticker_number');
             $table->integer('vehicle_id');
             $table->date('valid_until');
             $table->timestamps();

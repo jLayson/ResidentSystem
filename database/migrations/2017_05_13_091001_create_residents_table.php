@@ -15,6 +15,7 @@ class CreateResidentsTable extends Migration
     {
         Schema::create('residents', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('avatar')->nullable();
             $table->integer('user_id');
             $table->string('name_first')->nullable();
             $table->string('name_last')->nullable();
