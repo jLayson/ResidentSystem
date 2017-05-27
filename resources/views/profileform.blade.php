@@ -16,10 +16,16 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Edit Profile</div>
                 <div class="panel-body">
-                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/editprofile') }}">
+                    <form class="form-horizontal" enctype="multipart/form-data" role="form" method="POST" action="{{ url('/editprofile') }}">
                         {{ csrf_field() }}
 
                         <div class="form-group">
+
+                            <label for="avatar" class="col-md-4 control-label">Profile Image</label>
+                            <div class="col-md-6">
+                            <img src="{{ asset('storage/avatars/'.$res->avatar) }}" width="100px" height="100px">
+                                <input id="avatar" type="file" class="form-control" name="avatar" value="public/avatars/{{ $res->avatar }}" autofocus>
+                            </div>
 
                             <label for="name_first" class="col-md-4 control-label">First Name</label>
                             <div class="col-md-6">

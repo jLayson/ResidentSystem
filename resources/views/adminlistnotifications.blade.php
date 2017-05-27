@@ -23,6 +23,7 @@
 					</tr>
 				</thead>
 				<tbody>
+					<button class="button-xsmall pure-button"><a href="{{ url('/export/visitor/notification') }}">Export to PDF</a></button>
 					@foreach($visitors as $visitor)
 					@php
 						$time = date("d-m-Y h:i:s", strtotime($visitor->time_expected));
@@ -42,7 +43,7 @@
 									<b>N/A</b>
 								@endif
 							</td>
-							<td>{{ $visitor->visitor_code }}/td>
+							<td>{{ $visitor->visitor_code }}</td>
 							<td>
 								@if((strtotime($visitor->time_expected) > $now) && ($visitor->time_arrived == null))
 									<a href="/verifynotification/{{$id}}"><button type="button" class="btn btn-info btn-block">Verify</button></a>

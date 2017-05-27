@@ -23,7 +23,7 @@ class ResidentProfileController extends Controller
 
 		$resident = Resident::join('users', 'users.id', '=', 'residents.user_id')
 					->select('users.id',  'residents.name_first', 'residents.name_middle', 'residents.name_last',
-								'residents.address', 'residents.number_home', 'residents.number_mobile', 'residents.birth_date')
+								'residents.address', 'residents.number_home', 'residents.number_mobile', 'residents.birth_date', 'residents.avatar')
 					->where('users.id', '=', Auth::id())
 					->get();
 
@@ -34,6 +34,27 @@ class ResidentProfileController extends Controller
 		$data = $request->input();
 		unset($data['_token']);
 		$data['birth_date'] = date("Y-m-d", strtotime($data['birth_date']));
+
+			$file = $request->file('avatar');
+
+			$name = $request->input('name_last');
+
+			if($request->hasFile('avatar'))
+			{
+
+				$ext = $file->guessClientExtension();
+
+				$file->storeAs('public/avatars/', "{$name}.{$ext}");
+
+				$explode = $file->storeAs('public/avatars/', "{$name}.{$ext}");
+
+				$image = explode('/', $explode);
+
+				$imageName = $image[3];
+
+				$data['avatar'] = $imageName;
+
+			}
 
 		Resident::where('user_id', Auth::id())
 					->update($data);
@@ -46,7 +67,7 @@ class ResidentProfileController extends Controller
 
 		$resident = Resident::join('users', 'users.id', '=', 'residents.user_id')
 					->select('users.id',  'residents.name_first', 'residents.name_middle', 'residents.name_last',
-								'residents.address', 'residents.number_home', 'residents.number_mobile', 'residents.birth_date')
+								'residents.address', 'residents.number_home', 'residents.number_mobile', 'residents.birth_date', 'residents.avatar')
 					->where('users.id', '=', $userId)
 					->get();
 		$visitors = Visitor::where('visitors.submitted_by', '=', $userId)
@@ -69,7 +90,7 @@ class ResidentProfileController extends Controller
 
 		$residents = Resident::join('users', 'users.id', '=', 'residents.user_id')
 					->select('users.id',  'residents.name_first', 'residents.name_middle', 'residents.name_last',
-								'residents.address', 'residents.number_home', 'residents.number_mobile', 'residents.birth_date')
+								'residents.address', 'residents.number_home', 'residents.number_mobile', 'residents.birth_date', 'residents.avatar')
 					->offset($offset * 20)
 					->limit(20)
 					->orderBy('residents.id', 'desc')

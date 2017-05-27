@@ -12,6 +12,9 @@ use Illuminate\Http\Request;
 class VisitorNotificationController extends Controller
 {
 	public function userAddNotification(Request $request){
+
+		$visitor = new Visitor();
+
 		$data = $request->input();
 		$data['time_expected'] = date('Y-m-d', strtotime($data['date_expected'])) . " " . date('h:i:s', strtotime($data['time_expected']));
 		unset($data['date_expected']);
@@ -20,7 +23,7 @@ class VisitorNotificationController extends Controller
 		$data['submitted_by'] = Auth::id();
 		$data['visitor_code'] = date('Ymdhis') . Auth::id(); 
 
-		Visitor::insert($data);
+		$visitor->create($data);
 
 		return redirect('userviewnotifications');
 	}
@@ -56,12 +59,20 @@ class VisitorNotificationController extends Controller
 		return redirect('userviewnotifications');
 	}
 
+<<<<<<< HEAD
 	public function userDeleteNotification($id){
 		$visitor = Visitor::where('id', $id)
 					->update(['is_active' => 0]);
 
 		return redirect('userviewnotifications');
 	}
+=======
+	/*public function userDeleteNotification($id){
+		$visitor = Visitor::where('id', '=', $id)
+					->
+		
+	}*/
+>>>>>>> 154520bda3921f65e04482a13b6e89a8c373418a
 
 	public function adminViewAllNotifications($offset){
 		$visitors = Visitor::join('residents', 'residents.user_id', '=', 'submitted_by')

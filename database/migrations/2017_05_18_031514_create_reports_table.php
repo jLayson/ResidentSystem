@@ -17,6 +17,7 @@ class CreateReportsTable extends Migration
             $table->increments('id');
             $table->integer('report_nature');
             $table->string('description');
+            $table->string('location');
             $table->integer('submitted_by');
             $table->boolean('is_active')->default(1);
             $table->timestamps();

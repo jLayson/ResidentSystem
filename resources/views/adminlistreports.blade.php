@@ -16,6 +16,7 @@
 					</tr>
 				</thead>
 				<tbody>
+					<button class="button-xsmall pure-button"><a href="{{ url('/export/report') }}">Export to PDF</a></button>
 					@foreach($reports as $report)
 						<tr>
 							<td>{{ $report->nature_name }}</td>
