@@ -98,6 +98,8 @@
     <!--<script src="{{ URL::asset('js/dataTables.bootstrap.min.js') }}"></script>
     <script src="{{ URL::asset('js/jquery.dataTables.min.js') }}"></script>-->
 
+    <script type="text/javascript" src="{{ URL::asset('js/custom/visitorAjax.js') }}"/>
+
 
 <script type="text/javascript">
      $(document).ready(function(){
@@ -151,6 +153,7 @@
     })
 });
 </script>
+<meta name="_token" content="{!! csrf_token() !!}" />
 
 </body>
 </html>

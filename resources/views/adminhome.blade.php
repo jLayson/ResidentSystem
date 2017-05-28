@@ -20,6 +20,7 @@
     	<div class="col-md-8 col-md-offset-2">
     		<a href="{{ url('/listprofiles/0') }}"><p>List All Users</p></a>
             <a href="{{ url('/listnotifications/0') }}"><p>List All Notifications</p></a>
+            <a href="{{ url('/ajaxtest/0') }}"><p>Ajax Notifications</p></a>
             <a href="{{ url('/listpending/0') }}"><p>List All Pending Notifications</p></a>
             <a href="{{ url('/listreports/0') }}"><p>List All Reports</p></a>
             <a href="{{ url('/guestform') }}"><p>Guest Registration Form</p></a>

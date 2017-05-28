@@ -75,3 +75,7 @@ Route::get('/export/report', 'PdfExportController@reportExport');
 
 //PDF Export /Visitor Notification
 Route::get('/export/visitor/notification', 'PdfExportController@visitorNotifExport');
+
+//AJAX Test
+Route::get('/ajaxtest/{offset}', 'VisitorNotificationController@visitorGetAjaxForm');
+Route::post('/ajaxgetvisitors', 'VisitorNotificationController@visitorGetAjax');
