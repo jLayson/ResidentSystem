@@ -30,7 +30,7 @@
 						$id = $visitor->id;
 					@endphp
 						<tr>
-							<td>{{ $visitor->submitted_by}}</td>
+							<td>{{ $visitor->name_first . " " . $visitor->name_middle . " " . $visitor->name_last }}</td>
 							<td>{{ $visitor->visitor_name }}</td>
 							<td>{{ $visitor->reason_for_visit }}</td>
 							<td>

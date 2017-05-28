@@ -63,7 +63,7 @@ Route::get('/listreports', 'ReportController@adminListReports');
 //Admin /guest actions
 Route::get('/guestform', 'GuestController@addGuestForm');
 Route::post('/addguest', 'GuestController@addGuestRecord');
-Route::get('/listguests/{offset}', 'GuestController@listGuestRecord');
+Route::get('/listguests', 'GuestController@listGuestRecord');
 Route::get('/guestdeparture/{id}', 'GuestController@updateGuestDeparture');
 
 
@@ -75,3 +75,6 @@ Route::get('/export/report', 'PdfExportController@reportExport');
 
 //PDF Export /Visitor Notification
 Route::get('/export/visitor/notification', 'PdfExportController@visitorNotifExport');
+
+//PDF Export /Guest
+Route::get('/export/guest', 'PdfExportController@guestExport');

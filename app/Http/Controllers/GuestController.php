@@ -28,9 +28,9 @@ class GuestController extends Controller
 		unset($data['name_middle']);
 		unset($data['name_last']);
 
-		$guest = Guest::insert($data);
+		$guest = Guest::create($data);
 
-		return redirect('listguests/0');
+		return redirect('listguests');
 	}
 
 	public function updateGuestDeparture($id){
@@ -60,16 +60,13 @@ class GuestController extends Controller
 		return redirect('userviewreports');
 	}
 
-	public function listGuestRecord($offset){
-		$guests = Guest::join
-						->offset($offset)
+	public function listGuestRecord(){
+		$guests = Guest::join('residents', 'guests.person_to_visit', '=', 'user_id')
+						->select('guests.*', 'residents.name_first', 'residents.name_middle', 'residents.name_last')
 						->orderBy('created_at', 'desc')
-						->limit(20)
-						->get();
+						->paginate(10);
 
-		$total = ceil(count($guests)/20);
-
-		return view('adminlistguests')->with('guests', $guests)->with('total', $total);
+		return view('adminlistguests')->with('guests', $guests);
 	}
 
 }

@@ -19,6 +19,7 @@
 					</tr>
 				</thead>
 				<tbody>
+					<button class="button-xsmall pure-button"><a href="{{ url('/export/guest') }}">Export to PDF</a></button>
 					@foreach($guests as $guest)
 						@php
 							if($guest->time_departed == null)
@@ -29,7 +30,7 @@
 						<tr>
 							<td>{{ $guest->name}}</td>
 							<td>{{ $guest->reason}}</td>
-							<td>{{ $guest->person_to_visit }}</td>
+							<td>{{ $guest->name_first . " " . $guest->name_middle . " " . $guest->name_last }}</td>
 							<td>{{ $guest->vehicle_plate }}</td>
 							<td>{{ $guest->created_at }}</td>
 							<td></td>
@@ -45,6 +46,8 @@
 			</table>
 		</div>
 	</div>
+
+	{{ $guests->render() }}
 
 </div>
 

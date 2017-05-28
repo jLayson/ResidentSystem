@@ -67,7 +67,7 @@ class VisitorNotificationController extends Controller
 
 	public function adminViewAllNotifications(){
 		$visitors = Visitor::join('residents', 'residents.user_id', '=', 'submitted_by')
-					->select('visitors.id', 'name_first', 'name_middle', 'name_last', 'visitor_name', 'reason_for_visit', 'time_expected', 'time_arrived')
+					->select('visitors.id', 'residents.name_first', 'residents.name_middle', 'residents.name_last', 'visitor_name', 'reason_for_visit', 'time_expected', 'time_arrived')
 					->paginate(10);
 
 		/*foreach($visitors as $v){

@@ -7,6 +7,7 @@ use PDF;
 use App\Resident;
 use App\Visitor;
 use App\Report;
+use App\Guest;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 
@@ -183,6 +184,68 @@ class PdfExportController extends Controller
     		$pdf->loadHTML($html); 
 
     		return $pdf->stream('Visitor Notification List');
+    }
+
+    //Export Guests to PDF
+    public function guestExport()
+    {
+        $guest = Guest::join('residents', 'guests.person_to_visit', '=', 'user_id')
+                            ->select('guests.*', 'guests.created_at', 'residents.name_first', 'residents.name_middle', 'residents.name_last')
+                            ->get();
+
+        $pdf = PDF::loadView('exporttopdf');
+
+        $html = '<html>' . 
+                    '<style>' .
+                        'table {
+                            border-collapse: collapse;
+                        }
+
+                        table, th, td {
+                            padding-left: 5px;
+                            padding-right: 5px;
+                            border: 1px solid black;
+                            text-align: center;
+                            font-size: 12px;
+                        }
+                        h3 {
+                            text-align: center;
+                        }' .
+                    '</style>' .
+                    '<body>' .
+                        '<h3> Visitor Notification List </h3><br>' .
+                        '<table align="center">' . 
+                            '<thead>' .
+                                '<tr>' .
+                                    '<th><b>Guest Name</b></th>' .
+                                    '<th><b>Reason for Visit</b></th>' . 
+                                    '<th><b>Person to Visit</b></th>' . 
+                                    '<th><b>Vehicle Plate</b></th>' .
+                                    '<th><b>Time Arrived</b></th>' .
+                                    '<th><b>Time Departed</b></th>' .
+                                '</tr>' .
+                            '</thead>' .
+                            '<tbody>'; 
+
+        foreach ($guest as $details) 
+        { 
+            $html .=    "<tr>" .
+                        "<td>" . $details->name . "</td>" .
+                        "<td>" . $details->reason . "</td>" . 
+                        "<td>" . $details->name_first . " " . $details->name_middle . " " . $details->name_last . "</td>" . 
+                        "<td>" . $details->vehicle_plate . "</td>" .
+                        "<td>" . $details->created_at . "</td>" .
+                        "<td>" . $details->time_departed . "</td>" .
+                        "</tr>"; 
+        } 
+            $html .=    '</tbody>' . 
+                            '</table>' .
+                                '</body>' . 
+                                    '</html>'; 
+
+            $pdf->loadHTML($html); 
+
+            return $pdf->stream('Guest List');
     }
 
 }
