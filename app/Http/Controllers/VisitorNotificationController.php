@@ -67,9 +67,10 @@ class VisitorNotificationController extends Controller
 	}
 
 	public function adminViewAllNotifications(){
-		$visitors = Visitor::join('residents', 'residents.user_id', '=', 'submitted_by')
-					->select('visitors.id', 'name_first', 'name_middle', 'name_last', 'visitor_name', 'reason_for_visit', 'time_expected', 'time_arrived')
-					->paginate(10);
+		$visitors = Visitor::join('residents', 'visitors.submitted_by', '=', 'user_id')
+					->select('visitors.*', 'visitors.created_at', 'residents.name_first', 'residents.name_middle', 'residents.name_last')
+					->orderBy('created_at', 'desc')
+					->get();
 
 		/*foreach($visitors as $v){
 			$v->submitted_by = $v->name_first . " " . $v->name_middle . " " . $v->name_last;
@@ -83,13 +84,14 @@ class VisitorNotificationController extends Controller
 	public function adminViewPendingNotifications(){
 		$now = date('Y-m-d h:i:s'); 
 
-		$visitors = Visitor::join('residents', 'residents.user_id', '=', 'submitted_by')
-					->select('visitors.id', 'name_first', 'name_middle', 'name_last', 'visitor_name', 'reason_for_visit', 'time_expected', 'time_arrived')
+		$visitors = Visitor::join('residents', 'visitors.submitted_by', '=', 'user_id')
+					->select('visitors.*', 'visitors.created_at', 'residents.name_first', 'residents.name_middle', 'residents.name_last')
 					->where([
 						['time_arrived', null],
-						['visitors.time_expected', '>', $now]
+						['time_expected', '>', $now]
 					])
-					->paginate(10);
+					->orderBy('created_at', 'desc')
+					->get();
 
 		/*foreach($visitors as $v){
 			$v->submitted_by = $v->name_first . " " . $v->name_middle . " " . $v->name_last;

@@ -16,8 +16,7 @@
     <link href="{{ URL::asset('css/bootstrap-datepicker.css') }}" rel="stylesheet">
     <link href="{{ URL::asset('css/bootstrap-timepicker.css') }}" rel="stylesheet">
     <!-- Datatables Styles -->
-    <!--<link href="{{ URL::asset('css/dataTables.bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ URL::asset('css/jquery.dataTables.min.css') }}" rel="stylesheet">-->
+    <link href="{{ URL::asset('datatable/jquery.dataTables.min.css') }}" rel="stylesheet">
     
     <!-- Scripts -->
     <script>
@@ -95,9 +94,52 @@
     <script src="{{ URL::asset('js/bootstrap-datepicker.js') }}"></script>
     <script src="{{ URL::asset('js/bootstrap-timepicker.min.js') }}"></script>
     <!-- DataTable Scripts -->
-    <!--<script src="{{ URL::asset('js/dataTables.bootstrap.min.js') }}"></script>
-    <script src="{{ URL::asset('js/jquery.dataTables.min.js') }}"></script>-->
+    <script src="{{ URL::asset('datatable/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ URL::asset('datatable/moment.js') }}"></script>
 
+<script type="text/javascript">
+
+    $(document).ready(function(){
+
+        $('#datatable').DataTable({
+            "searching" : false
+        });
+            
+        //Table ID for DataTable
+        var table = $('#dateTableWithDateRange').DataTable();
+
+        // Date range filter
+        //$.fn.dataTable.ext.search.push(
+        $.fn.dataTableExt.afnFiltering.push(
+
+            function(settings, data, dataIndex) {
+
+            //Start Date
+            var startDate = $('#startDate').val();
+
+            //End Date
+            var endDate = $('#endDate').val();
+
+            var created_at = data[3] || 0;
+
+                if ((startDate == "" || endDate == "") || (moment(created_at).isSameOrAfter(startDate) && moment(created_at).isSameOrBefore(endDate))) 
+                {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+
+        );
+            
+        //StartDate and EndDate class range            
+        $('#startDate, #endDate').change(function() {
+            table.draw();
+        });
+
+    });
+
+</script>
 
 <script type="text/javascript">
      $(document).ready(function(){

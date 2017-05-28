@@ -72,14 +72,7 @@ class ReportController extends Controller
 					->join('residents', 'residents.user_id', '=', 'reports.submitted_by')
 					->select('name_first', 'name_middle', 'name_last', 'report_natures.nature_name', 'reports.description', 'reports.location', 'reports.created_at')
 					->orderBy('created_at', 'desc')
-					->paginate(10);
-
-		/*foreach($reports as $report)
-		{
-			$report['submitted_by'] = $report['name_first'] . " " . $report['name_middle'] . " " . $report['name_last'];
-		}
-		
-		$total = ceil(count($reports)/20);*/
+					->get();
 
 		return view('adminlistreports')->with('reports', $reports);
 	}

@@ -1,11 +1,22 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
 
+@yield('script')
+
+<div class="container" onload="loadNow()">
 	<div class="row">
 		<div class="col-md-10 col-md-offset-1">
-			<table class="table table-bordered table-striped">
+
+			<button class="button-xsmall pure-button"><a href="{{ url('/export/report') }}">Export to PDF</a></button>
+
+			<!-- <div class="input-group">
+				<input class="datepicker range-filter" type="text" id="startDate" placeholder="Start Date" readonly="" required/>
+				<div class="input-group-addon">to</div>
+    			<input class="datepicker range-filter" type="text" id="endDate" readonly="End Date" required/>
+			</div> -->
+
+			<table class="table table-bordered table-striped" id="datatable">
 				<thead>
 					<tr>
 						<td>Report Nature</td>
@@ -16,7 +27,6 @@
 					</tr>
 				</thead>
 				<tbody>
-					<button class="button-xsmall pure-button"><a href="{{ url('/export/report') }}">Export to PDF</a></button>
 					@foreach($reports as $report)
 						<tr>
 							<td>{{ $report->nature_name }}</td>
@@ -30,8 +40,6 @@
 			</table>
 		</div>
 	</div>
-
-	{{ $reports->render() }}
-
 </div>
+
 @endsection

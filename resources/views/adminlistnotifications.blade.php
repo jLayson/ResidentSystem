@@ -10,7 +10,15 @@
 
 	<div class="row">
 		<div class="col-md-10 col-md-offset-1">
-			<table class="table table-bordered table-striped">
+			<button class="button-xsmall pure-button"><a href="{{ url('/export/visitor/notification') }}">Export to PDF</a></button>
+
+			<div class="input-group">
+				<input class="datepicker range-filter" type="text" id="startDate" placeholder="Start Date" readonly="" required/>
+				<div class="input-group-addon">to</div>
+    			<input class="datepicker range-filter" type="text" id="endDate" readonly="End Date" required/>
+			</div>
+
+			<table class="table table-bordered table-striped" id="dateTableWithDateRange">
 				<thead>
 					<tr>
 						<td>Submitted By</td>
@@ -23,19 +31,31 @@
 					</tr>
 				</thead>
 				<tbody>
-					<button class="button-xsmall pure-button"><a href="{{ url('/export/visitor/notification') }}">Export to PDF</a></button>
 					@foreach($visitors as $visitor)
-					@php
+					<!-- @php
 						$time = date("d-m-Y h:i:s", strtotime($visitor->time_expected));
 						$id = $visitor->id;
-					@endphp
+					@endphp -->
 						<tr>
 							<td>{{ $visitor->name_first . " " . $visitor->name_middle . " " . $visitor->name_last }}</td>
 							<td>{{ $visitor->visitor_name }}</td>
 							<td>{{ $visitor->reason_for_visit }}</td>
+
+							@php
+
+								$te = explode(" ", $visitor->time_expected) 
+
+							@endphp
+
+							@foreach((array) $te[0] as $teDate)
+								@foreach((array) $te[1] as $teTime)
+
 							<td>
-								{{ $time }}
+								{{ $teDate }} <!-- {{ $teTime }} -->
 							</td>
+
+								@endforeach
+							@endforeach
 							<td>
 								@if($visitor->time_arrived)
 									{{ $visitor->time_arrived }}
@@ -55,8 +75,6 @@
 			</table>
 		</div>
 	</div>
-
-	{{ $visitors->render() }}
 
 </div>
 
