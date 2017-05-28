@@ -6,16 +6,16 @@
 	$now = strtotime(date('Y-m-d h:i:s'));
 @endphp
 
-<div class="container">
+<div class="container-fluid">
 
 	<div class="row">
 		<div class="col-md-10 col-md-offset-1">
 			<button class="button-xsmall pure-button"><a href="{{ url('/export/visitor/notification') }}">Export to PDF</a></button>
 
 			<div class="input-group">
-				<input class="datepicker range-filter" type="text" id="startDate" placeholder="Start Date" readonly="" required/>
-				<div class="input-group-addon">to</div>
-    			<input class="datepicker range-filter" type="text" id="endDate" readonly="End Date" required/>
+				<input class="form-control datepicker range-filter" type="text" id="startDate" placeholder="Start Date" readonly="" required/>
+				<div class="input-group-addon">TO</div>
+    			<input class="form-control datepicker range-filter" type="text" id="endDate" readonly="End Date" required/>
 			</div>
 
 			<table class="table table-bordered table-striped" id="dateTableWithDateRange">
@@ -24,6 +24,7 @@
 						<td>Submitted By</td>
 						<td>Visitor Name</td>
 						<td>Reason for Visit</td>
+						<td>Expected Date of Arrival</td>
 						<td>Expected Time of Arrival</td>
 						<td>Time Arrived</td>
 						<td>Visitor Code</td>
@@ -50,9 +51,8 @@
 							@foreach((array) $te[0] as $teDate)
 								@foreach((array) $te[1] as $teTime)
 
-							<td>
-								{{ $teDate }} <!-- {{ $teTime }} -->
-							</td>
+							<td>{{ $teDate }}</td>
+							<td>{{ $teTime }}</td>
 
 								@endforeach
 							@endforeach

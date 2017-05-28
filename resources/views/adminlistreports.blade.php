@@ -2,8 +2,6 @@
 
 @section('content')
 
-@yield('script')
-
 <div class="container" onload="loadNow()">
 	<div class="row">
 		<div class="col-md-10 col-md-offset-1">
