@@ -31,13 +31,7 @@
 		</div>
 	</div>
 
-	<div class="row">
-		<div class="col-md-2 col-md-offset-5">
-			@for ($ctr = 0; $ctr < $total; $ctr++)
-				<a href="/listprofiles/{{ $ctr }}"><button class="btn btn-default">{{ $ctr + 1 }}</button></a>
-			@endfor
-		</div>
-	</div>
+	{{ $reports->render() }}
 
 </div>
 @endsection

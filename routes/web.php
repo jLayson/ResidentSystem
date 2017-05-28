@@ -49,16 +49,16 @@ Route::get('/deletenotification/{id}', 'VisitorNotificationController@userDelete
 
 
 //Admin /profile actions
-Route::get('/listprofiles/{offset}', 'ResidentProfileController@adminViewListProfiles');
+Route::get('/listprofiles', 'ResidentProfileController@adminViewListProfiles');
 Route::get('/adminviewprofile/{id}', 'ResidentProfileController@adminViewProfile');
 
 //Admin /visitor actions
-Route::get('/listnotifications/{offset}', 'VisitorNotificationController@adminViewAllNotifications');
-Route::get('/listpending/{offset}', 'VisitorNotificationController@adminViewPendingNotifications');
+Route::get('/listnotifications', 'VisitorNotificationController@adminViewAllNotifications');
+Route::get('/listpending', 'VisitorNotificationController@adminViewPendingNotifications');
 Route::get('/verifynotification/{id}', 'VisitorNotificationController@adminVerifyNotification');
 
 //Admin /report actions
-Route::get('/listreports/{offset}', 'ReportController@adminListReports');
+Route::get('/listreports', 'ReportController@adminListReports');
 
 //Admin /guest actions
 Route::get('/guestform', 'GuestController@addGuestForm');

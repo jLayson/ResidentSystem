@@ -81,23 +81,14 @@ class ResidentProfileController extends Controller
 		return view('adminviewresident')->with('resident', $resident)->with('visitors', $visitors)->with('visitorspending', $visitorspending);
 	}
 
-	public function adminViewListProfiles($offset){
-		if(!isset($offset)){
-			$offset = 0;
-		}else{
-			$offset = 0;
-		}
-
+	public function adminViewListProfiles()
+	{
 		$residents = Resident::join('users', 'users.id', '=', 'residents.user_id')
 					->select('users.id',  'residents.name_first', 'residents.name_middle', 'residents.name_last',
 								'residents.address', 'residents.number_home', 'residents.number_mobile', 'residents.birth_date', 'residents.avatar')
-					->offset($offset * 20)
-					->limit(20)
 					->orderBy('residents.id', 'desc')
-					->get();
+					->paginate(10);
 
-		$total = ceil(count($residents)/20);
-
-		return view('adminlistresidents')->with('residents', $residents)->with('total', $total);
+		return view('adminlistresidents')->with('residents', $residents);
 	}
 }

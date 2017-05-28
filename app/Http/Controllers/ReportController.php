@@ -66,22 +66,21 @@ class ReportController extends Controller
 		return view('submittedreports')->with('reports', $reports);
 	}
 
-	public function adminListReports($offset){
+	public function adminListReports()
+	{
 		$reports = Report::join('report_natures', 'report_natures.id', '=', 'reports.report_nature')
 					->join('residents', 'residents.user_id', '=', 'reports.submitted_by')
 					->select('name_first', 'name_middle', 'name_last', 'report_natures.nature_name', 'reports.description', 'reports.location', 'reports.created_at')
 					->orderBy('created_at', 'desc')
-					->offset($offset)
-					->limit(20)
-					->get();
+					->paginate(10);
 
-		foreach($reports as $report)
+		/*foreach($reports as $report)
 		{
 			$report['submitted_by'] = $report['name_first'] . " " . $report['name_middle'] . " " . $report['name_last'];
 		}
 		
-		$total = ceil(count($reports)/20);
+		$total = ceil(count($reports)/20);*/
 
-		return view('adminlistreports')->with('reports', $reports)->with('total', $total);
+		return view('adminlistreports')->with('reports', $reports);
 	}
 }
