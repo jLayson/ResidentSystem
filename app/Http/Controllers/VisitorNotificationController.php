@@ -59,7 +59,6 @@ class VisitorNotificationController extends Controller
 		return redirect('userviewnotifications');
 	}
 
-
 	public function userDeleteNotification($id){
 		$visitor = Visitor::where('id', $id)
 					->update(['is_active' => 0]);
@@ -67,20 +66,18 @@ class VisitorNotificationController extends Controller
 		return redirect('userviewnotifications');
 	}
 
-	public function adminViewAllNotifications($offset){
+	public function adminViewAllNotifications(){
 		$visitors = Visitor::join('residents', 'residents.user_id', '=', 'submitted_by')
 					->select('visitors.id', 'name_first', 'name_middle', 'name_last', 'visitor_name', 'reason_for_visit', 'time_expected', 'time_arrived')
-					->offset($offset * 20)
-					->limit(20)
-					->get();
+					->paginate(10);
 
-		foreach($visitors as $v){
+		/*foreach($visitors as $v){
 			$v->submitted_by = $v->name_first . " " . $v->name_middle . " " . $v->name_last;
 		}
 
-		$total = ceil(count($visitors)/20);
+		$total = ceil(count($visitors)/20);*/
 
-		return view('adminlistnotifications')->with('visitors', $visitors)->with('total', $total);
+		return view('adminlistnotifications')->with('visitors', $visitors);
 	}
 
 	public function adminViewPendingNotifications(){
@@ -92,15 +89,15 @@ class VisitorNotificationController extends Controller
 						['time_arrived', null],
 						['visitors.time_expected', '>', $now]
 					])
-					->get();
+					->paginate(10);
 
-		foreach($visitors as $v){
+		/*foreach($visitors as $v){
 			$v->submitted_by = $v->name_first . " " . $v->name_middle . " " . $v->name_last;
 		}
 
-		$total = ceil(count($visitors)/20);
+		$total = ceil(count($visitors)/20);*/
 
-		return view('adminlistnotifications')->with('visitors', $visitors)->with('total', $total);
+		return view('adminlistnotifications')->with('visitors', $visitors);
 	}
 
 	public function adminVerifyNotification($id){
