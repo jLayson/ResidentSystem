@@ -11,20 +11,19 @@
                     <form class="form-horizontal" role="form" method="POST" action="{{ url('/addguest') }}">
                         {{ csrf_field() }}
 
-                        <div class="form-group">
 
-                            <label for="name_first" class="col-md-4 control-label">First Name</label>
+                            <label for="name" class="col-md-4 control-label">Name</label>
                             <div class="col-md-6">
-                                <input id="name_first" type="text" class="form-control" name="name_first" required autofocus>
+                                <input id="name_first" type="text" class="form-control" name="name" required autofocus>
 
-                                @if ($errors->has('first_name'))
+                                @if ($errors->has('name'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('first_name') }}</strong>
+                                        <strong>{{ $errors->first('name') }}</strong>
                                     </span>
                                 @endif
                             </div>
 
-                            <label for="name_middle" class="col-md-4 control-label">Middle Name</label>
+                            <!-- <label for="name_middle" class="col-md-4 control-label">Middle Name</label>
                             <div class="col-md-6">
                                 <input id="name_middle" type="text" class="form-control" name="name_middle" required autofocus>
 
@@ -44,10 +43,7 @@
                                         <strong>{{ $errors->first('last_name') }}</strong>
                                     </span>
                                 @endif
-                            </div>
-
-                        </div>
-
+                            </div> -->
                         <div class="form-group">
                             <label for="reason" class="col-md-4 control-label">Reason for Visit</label>
                             <div class="col-md-6">
@@ -76,6 +72,7 @@
 
                             <div class="col-md-6">
                                 <select id="person_to_visit" name="person_to_visit" class="form-control">
+                                        <option value="0">N/A</option>
                                     @foreach($residents as $resident)
                                         <option value='{{ $resident->id }}'>{{ $resident->name_first }} {{ $resident->name_last }}</option>
                                     @endforeach

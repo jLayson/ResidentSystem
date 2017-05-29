@@ -45,6 +45,7 @@ class VisitorNotificationController extends Controller
 	public function userViewSubmittedNotifications(){
 		$visitors = Visitor::select('id', 'visitor_name', 'reason_for_visit', 'time_expected', 'time_arrived', 'visitor_code')
 					->where('submitted_by', '=', Auth::id())
+					->where('is_active', '=', 1)
 					->get();
 
 		return view('submittednotifications')->with('visitors', $visitors);
@@ -179,6 +180,8 @@ class VisitorNotificationController extends Controller
 	}
 
 	public function getSecurityHome(){
+		$now = date('Y-m-d h:i:s');
+
 		$residents = Resident::get();
 
 		$visitors = Visitor::join('residents', 'visitors.submitted_by', '=', 'user_id')
@@ -194,6 +197,8 @@ class VisitorNotificationController extends Controller
 	}
 
 	public function ajaxVisitorTable(){
+		$now = date('Y-m-d h:i:s');
+
 		$returndata = "";
 
 		$visitors = Visitor::join('residents', 'visitors.submitted_by', '=', 'user_id')
