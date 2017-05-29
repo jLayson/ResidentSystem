@@ -94,4 +94,13 @@ class GuestController extends Controller
 										->with('residents', $residents);
 	}
 
+	public function addGuestAjax(Request $request){
+		$data = $request->input();
+		$data['name'] = $data['name_first'] . " " . $data['name_middle'] . " " . $data['name_last'];
+
+		unset($data['_token']);
+
+		$guest = Guest::create($data);
+	}
+
 }

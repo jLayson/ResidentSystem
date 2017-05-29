@@ -9,17 +9,6 @@ $(window).load(function(){
     var visitorTableUrl = "/ajaxsecuritynotification";
     var submitNotificationUrl = "/ajaxsecuritysubmit";
 
-    //GET TABLE DETAILS EVERY 5 SECS
-    window.setInterval(function(){
-       $.ajax({
-            type: "GET",
-            url: visitorTableUrl,
-            success: function(result){
-                $('#visitorTable').html(result);
-            }
-       });
-    }, 5000);
-
     //SUBMIT GUEST REGISTRATION
     $("#submitForm").click(function() {
         var name_first = $('#name_first').val();
@@ -50,5 +39,16 @@ $(window).load(function(){
             }
        });
     });
+
+    //GET TABLE DETAILS EVERY 5 SECS
+    window.setInterval(function(){
+       $.ajax({
+            type: "GET",
+            url: visitorTableUrl,
+            success: function(result){
+                $('#visitorTable').html(result);
+            }
+       });
+    }, 5000);
 
 });

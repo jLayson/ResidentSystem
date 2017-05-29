@@ -196,5 +196,7 @@
 
 @yield('pageJS')
 
+<meta name="_token" content="{!! csrf_token() !!}" />
+
 </body>
 </html>
