@@ -6,7 +6,7 @@
 
 	<div class="row">
 		<div class="col-md-10 col-md-offset-1">
-			<table id="adminListResidents" class="table table-bordered table-striped">
+			<table id="adminListResidents" class="table table-bordered table-striped" id="datatable">
 				<thead>
 					<tr>
 						<td>Resident Image</td>
