@@ -22,12 +22,6 @@ class GuestController extends Controller
 		$data = $request->input();
 		unset($data['_token']);
 
-		$data['name'] = $data['name_first'] . " " . $data['name_middle'] . " " . $data['name_last'];
-
-		unset($data['name_first']);
-		unset($data['name_middle']);
-		unset($data['name_last']);
-
 		$guest = Guest::create($data);
 
 		return redirect('listguests');
@@ -36,12 +30,19 @@ class GuestController extends Controller
 	public function updateGuestDeparture($id){
 		$now = date("Y-m-d h:i:s");
 
-		$report = Report::where('id', '=', $id)
-						->update([
-								['time_departed' => $now]
-							]);
+		$guest = Guest::find($id);
 
-		return redirect('userviewreports');
+		$guest->time_departed = $now;
+
+		$guest->save();
+
+		$guests = Guest::leftjoin('residents', 'guests.person_to_visit', 'residents.id')
+						->where('is_active', 1)
+						->select('guests.*', 'residents.name_first', 'residents.name_middle', 'residents.name_last')
+						->orderBy('guests.created_at', 'desc')
+						->get();
+
+		return view('adminlistguests')->with('guests', $guests);
 	}
 
 	public function editGuestDetails($id){
@@ -54,17 +55,18 @@ class GuestController extends Controller
 		unset($data['name_middle']);
 		unset($data['name_last']);
 
-		$report = Report::where('id', '=', $id)
+		$guest = Guest::where('id', '=', $id)
 						->update($data);
 
-		return redirect('userviewreports');
+		return redirect('adminlistguests');
 	}
 
 	public function listGuestRecord(){
-		$guests = Guest::join('residents', 'guests.person_to_visit', '=', 'user_id')
+		
+		$guests = Guest::leftjoin('residents', 'guests.person_to_visit', 'residents.id')
+						->where('is_active', 1)
 						->select('guests.*', 'residents.name_first', 'residents.name_middle', 'residents.name_last')
-						->orderBy('created_at', 'desc')
-						->paginate(10);
+						->get();
 
 		return view('adminlistguests')->with('guests', $guests);
 	}
