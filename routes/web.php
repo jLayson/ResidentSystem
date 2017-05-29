@@ -24,9 +24,11 @@ Route::get('/home', function () {
 	}elseif(Auth::user()->account_type == 1){
 		return view('securityhome');
 	}elseif(Auth::user()->account_type == 2){
-		return view('adminhome');	
+		return redirect('securityhomepageredirect');	
 	}
 });
+
+Route::get('/securityhomepageredirect', 'VisitorNotificationController@getSecurityHome');
 
 // Resident /profile actions
 Route::get('/viewprofile', 'ResidentProfileController@userViewProfile');
@@ -79,3 +81,6 @@ Route::get('/export/visitor/notification', 'PdfExportController@visitorNotifExpo
 //AJAX Test
 Route::get('/ajaxtest/{offset}', 'VisitorNotificationController@visitorGetAjaxForm');
 Route::post('/ajaxgetvisitors', 'VisitorNotificationController@visitorGetAjax');
+
+//Security AJAX
+Route::get('/ajaxsecuritynotification', 'VisitorNotificationController@ajaxVisitorTable');

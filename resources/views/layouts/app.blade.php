@@ -194,5 +194,8 @@
 });
 </script>
 
+
+<script src="{{ URL::asset('js/custom/securityHomeAjax.js') }}"></script>
+
 </body>
 </html>

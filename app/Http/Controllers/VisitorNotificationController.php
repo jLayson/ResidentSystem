@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Visitor;
+use App\Resident;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -20,8 +21,21 @@ class VisitorNotificationController extends Controller
 		unset($data['date_expected']);
 		unset($data['_token']);
 
+		$user = Resident::where('user_id', '=', Auth::id())
+							->get();
+
+		$initals;
+
+		foreach($user as $u){
+			$f = substr($u->name_first, 0, 1);
+			$m = substr($u->name_middle, 0, 1);
+			$l = substr($u->name_last, 0, 1);
+
+			$initials = $f[0] . $m[0] . $l[0];
+		}
+
 		$data['submitted_by'] = Auth::id();
-		$data['visitor_code'] = date('Ymdhis') . Auth::id(); 
+		$data['visitor_code'] = date('ymdhi') . $initials;
 
 		$visitor->create($data);
 
@@ -29,7 +43,7 @@ class VisitorNotificationController extends Controller
 	}
 
 	public function userViewSubmittedNotifications(){
-		$visitors = Visitor::select('id', 'visitor_name', 'reason_for_visit', 'time_expected', 'time_arrived')
+		$visitors = Visitor::select('id', 'visitor_name', 'reason_for_visit', 'time_expected', 'time_arrived', 'visitor_code')
 					->where('submitted_by', '=', Auth::id())
 					->get();
 
@@ -162,5 +176,42 @@ class VisitorNotificationController extends Controller
 		}
 
 		return $returndata;
+	}
+
+	public function getSecurityHome(){
+		$residents = Resident::get();
+
+		$visitors = Visitor::join('residents', 'visitors.submitted_by', '=', 'user_id')
+					->select('visitors.*', 'visitors.created_at', 'residents.name_first', 'residents.name_middle', 'residents.name_last')
+					->orderBy('created_at', 'desc')
+					->get();
+
+		return view('securityhomepage')->with('visitors', $visitors)->with('residents', $residents);	
+	}
+
+	public function ajaxVisitorTable(){
+		$visitors = Visitor::join('residents', 'visitors.submitted_by', '=', 'user_id')
+					->select('visitors.*', 'visitors.created_at', 'residents.name_first', 'residents.name_middle', 'residents.name_last')
+					->orderBy('created_at', 'desc')
+					->get();
+
+		foreach($visitors as $visitor){
+			$name = $visitor->name_first . " " . $visitor->name_second . " " . $visitor->name_last;
+			$te = explodeo(" ", $visitor->time_expected);
+			$now = strtotime(date('Y-m-d h:i:s'));
+
+			if((strtotime($visitor->time_expected) > $now) && ($visitor->time_arrived == null)){
+				$button = "<a href\"/verifynotification/{{ id }}\"><button type=\"button\" class=\"btn btn-info btn-block\">Verify</button></a>";
+			}
+
+			$returndata .= "<tr>
+								<td>" . $name . "</td>
+								<td>" . $visitor->visitor_name . "</td>
+								<td>" . $te[0] . "</td>
+								<td>" . $te[1] . "</td>
+								<td>" . $visitor->visitor_code . "</td>
+								<td>" . $button . "</td>
+							</tr>";
+		}
 	}
 }
