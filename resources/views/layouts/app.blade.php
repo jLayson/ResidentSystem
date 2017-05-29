@@ -104,12 +104,7 @@
         $('#datatable').DataTable({
             "searching" : false
         });
-
-        $('#dataTableGuest').DataTable({
-            "searching" : false.
-            "order" : [4, "desc"]
-        });
-            
+        
         //Table ID for DataTable
         var table = $('#dateTableWithDateRange').DataTable();
 

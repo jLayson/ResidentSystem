@@ -75,8 +75,12 @@ class VisitorNotificationController extends Controller
 	}
 
 	public function userDeleteNotification($id){
-		$visitor = Visitor::where('id', $id)
-					->update(['is_active' => 0]);
+
+		$visitor = Visitor::find($id);
+
+		$visitor->is_active = 0;
+
+		$visitor->update();
 
 		return redirect('userviewnotifications');
 	}

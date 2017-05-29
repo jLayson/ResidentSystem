@@ -67,6 +67,7 @@ Route::get('/guestform', 'GuestController@addGuestForm');
 Route::post('/addguest', 'GuestController@addGuestRecord');
 Route::get('/listguests', 'GuestController@listGuestRecord');
 Route::get('/guestdeparture/{id}', 'GuestController@updateGuestDeparture');
+Route::post('/guestupdate/{id}', 'GuestController@editGuestDetails');
 
 
 //PDF Export /resident

@@ -36,39 +36,62 @@ class GuestController extends Controller
 
 		$guest->save();
 
+		$residents = Resident::get();
+
 		$guests = Guest::leftjoin('residents', 'guests.person_to_visit', 'residents.id')
 						->where('is_active', 1)
 						->select('guests.*', 'residents.name_first', 'residents.name_middle', 'residents.name_last')
 						->orderBy('guests.created_at', 'desc')
 						->get();
 
-		return view('adminlistguests')->with('guests', $guests);
+		return view('adminlistguests')->with('guests', $guests)
+										->with('residents', $residents);
 	}
 
-	public function editGuestDetails($id){
-		$data = $request->input();
-		unset($data['_token']);
+	public function editGuestDetails(Request $request, $id){
+		
+		$guest = Guest::find($id);
 
-		$data['name'] = $data['name_first'] . " " . $data['name_middle'] . " " . $data['name_last'];
+		if($request->input('name') != null) {
+            $guest->name = $request->input('name');
+        }
 
-		unset($data['name_first']);
-		unset($data['name_middle']);
-		unset($data['name_last']);
+        if($request->input('reason') != null) {
+            $guest->reason = $request->input('reason');
+        }
 
-		$guest = Guest::where('id', '=', $id)
-						->update($data);
+        if($request->input('person_to_visit') != null) {
+            $guest->person_to_visit = $request->input('person_to_visit');
+        }
 
-		return redirect('adminlistguests');
-	}
+        if($request->input('plate') != null) {
+            $guest->vehicle_plate = $request->input('plate');
+        }
 
-	public function listGuestRecord(){
+		$guest->update();
+
+		$residents = Resident::get();
 		
 		$guests = Guest::leftjoin('residents', 'guests.person_to_visit', 'residents.id')
 						->where('is_active', 1)
 						->select('guests.*', 'residents.name_first', 'residents.name_middle', 'residents.name_last')
 						->get();
 
-		return view('adminlistguests')->with('guests', $guests);
+		return view('adminlistguests')->with('guests', $guests)
+										->with('residents', $residents);
+	}
+
+	public function listGuestRecord(){
+
+		$residents = Resident::get();
+		
+		$guests = Guest::leftjoin('residents', 'guests.person_to_visit', 'residents.id')
+						->where('is_active', 1)
+						->select('guests.*', 'residents.name_first', 'residents.name_middle', 'residents.name_last')
+						->get();
+
+		return view('adminlistguests')->with('guests', $guests)
+										->with('residents', $residents);
 	}
 
 }
