@@ -4,8 +4,9 @@
 <div class="row">
     <div class="col-md-4">
         <div class="well">
-                <form class="form-horizontal" role="form" method="POST" action="{{ url('/addguest') }}">
                     {{ csrf_field() }}
+
+                    <>
 
                     <div class="form-group">
 
@@ -73,7 +74,7 @@
 
                         <div class="form-group">
                         <div class="col-md-6 col-md-offset-4">
-                            <button type="submit" class="btn btn-primary">
+                            <button id="submitForm" class="btn btn-primary">
                                 Submit
                             </button>
                         </div>
@@ -88,12 +89,6 @@
 
     <div class="col-md-8">
         <div class="well">
-
-        <div class="input-group">
-            <input class="form-control datepicker range-filter" type="text" id="startDate" placeholder="Start Date" readonly="" required/>
-            <div class="input-group-addon">TO</div>
-            <input class="form-control datepicker range-filter" type="text" id="endDate" readonly="End Date" required/>
-        </div>
 
         <table class="table table-bordered table-striped" id="dateTableWithDateRange">
             <thead>
@@ -145,4 +140,8 @@
     </div>
 </div>
 
+@endsection
+
+@section('pageJS')
+    <script src="{{ URL::asset('js/custom/securityHomeAjax.js') }}"></script>
 @endsection

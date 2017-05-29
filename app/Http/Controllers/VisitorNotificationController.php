@@ -183,6 +183,10 @@ class VisitorNotificationController extends Controller
 
 		$visitors = Visitor::join('residents', 'visitors.submitted_by', '=', 'user_id')
 					->select('visitors.*', 'visitors.created_at', 'residents.name_first', 'residents.name_middle', 'residents.name_last')
+					->where([
+						['time_arrived', null],
+						['time_expected', '>', $now]
+					])
 					->orderBy('created_at', 'desc')
 					->get();
 
@@ -190,14 +194,20 @@ class VisitorNotificationController extends Controller
 	}
 
 	public function ajaxVisitorTable(){
+		$returndata = "";
+
 		$visitors = Visitor::join('residents', 'visitors.submitted_by', '=', 'user_id')
 					->select('visitors.*', 'visitors.created_at', 'residents.name_first', 'residents.name_middle', 'residents.name_last')
+					->where([
+						['time_arrived', null],
+						['time_expected', '>', $now]
+					])
 					->orderBy('created_at', 'desc')
 					->get();
 
 		foreach($visitors as $visitor){
 			$name = $visitor->name_first . " " . $visitor->name_second . " " . $visitor->name_last;
-			$te = explodeo(" ", $visitor->time_expected);
+			$te = explode(" ", $visitor->time_expected);
 			$now = strtotime(date('Y-m-d h:i:s'));
 
 			if((strtotime($visitor->time_expected) > $now) && ($visitor->time_arrived == null)){
@@ -213,5 +223,7 @@ class VisitorNotificationController extends Controller
 								<td>" . $button . "</td>
 							</tr>";
 		}
+
+		return $returndata;
 	}
 }

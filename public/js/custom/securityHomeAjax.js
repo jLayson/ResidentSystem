@@ -15,7 +15,6 @@ $(window).load(function(){
             type: "GET",
             url: visitorTableUrl,
             success: function(result){
-                alert("Updated!");
                 $('#visitorTable').html(result);
             }
        });
@@ -47,7 +46,7 @@ $(window).load(function(){
             url: submitNotificationUrl,
             data: postData,
             success: function(result){
-                $('#successnotification').toggle();
+              $('#successnotification').toggle();
             }
        });
     });

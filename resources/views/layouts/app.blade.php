@@ -194,8 +194,7 @@
 });
 </script>
 
-
-<script src="{{ URL::asset('js/custom/securityHomeAjax.js') }}"></script>
+@yield('pageJS')
 
 </body>
 </html>
