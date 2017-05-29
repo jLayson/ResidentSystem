@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container-fluid">
 
 	<div class="row">
 		<div class="col-md-10 col-md-offset-1">
-			<table class="table table-bordered table-striped">
+			<table class="table table-bordered table-striped" id="datatable">
 				<thead>
 					<tr>
 						<td>Report Nature</td>

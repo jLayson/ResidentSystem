@@ -6,11 +6,11 @@
 	$now = strtotime(date('Y-m-d h:i:s'));
 @endphp
 
-<div class="container">
+<div class="container-fluid">
 
 	<div class="row">
 		<div class="col-md-10 col-md-offset-1">
-			<table class="table table-bordered table-striped">
+			<table class="table table-bordered table-striped" id="datatable">
 				<thead>
 					<tr>
 						<td>Visitor Name</td>
@@ -34,16 +34,16 @@
 								{{ $time }}
 							</td>
 							<td>
-								@if($visitor->time_arrived)
-									{{ $visitor->time_arrived }}
-								@else
+								@if($visitor->time_arrived == "0000-00-00 00:00:00")
 									<b>N/A</b>
+								@else
+									{{ $visitor->time_arrived }}
 								@endif
 							</td>
 							<td>{{ $visitor->visitor_code }}</td>
 							<td>
 								@if(strtotime($visitor->time_expected) > $now)
-									<a href="{{ url('/editnotification/') . $id }}"><button type="button" class="btn btn-info btn-block">Edit</button></a>
+									<a href="/editnotification/{{ $visitor->id }}"><button type="button" class="btn btn-info btn-block">Edit</button></a>
 									<button type="button" class="btn btn-info btn-block" data-toggle="modal" data-target="#deleteModal">Delete</button>
 								@endif
 							</td>
