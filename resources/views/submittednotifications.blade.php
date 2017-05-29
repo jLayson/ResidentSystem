@@ -48,6 +48,29 @@
 								@endif
 							</td>
 						</tr>
+
+						<!-- Modal -->
+						<div id="deleteModal" class="modal fade" role="dialog">
+							<div class="modal-dialog modal-sm">
+
+						    <!-- Modal content-->
+						    <div class="modal-content">
+						    	<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal">&times;</button>
+						        	<h4 class="modal-title">Delete</h4>
+						      	</div>
+						    	<div class="modal-body">
+									<p>Are you sure you want to delete this entry?</p>
+								</div>
+						    	<div class="modal-footer">
+						    		<a href="/deletenotification/{{ $visitor->id }}"><button type="button" class="btn btn-default">Yes</button></a>
+									<button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+						    	</div>
+						    </div>
+
+						  </div>
+						</div>
+
 					@endforeach
 				</tbody>
 			</table>
@@ -56,25 +79,5 @@
 
 </div>
 
-<!-- Modal -->
-<div id="deleteModal" class="modal fade" role="dialog">
-	<div class="modal-dialog modal-sm">
 
-    <!-- Modal content-->
-    <div class="modal-content">
-    	<div class="modal-header">
-			<button type="button" class="close" data-dismiss="modal">&times;</button>
-        	<h4 class="modal-title">Delete</h4>
-      	</div>
-    	<div class="modal-body">
-			<p>Are you sure you want to delete this entry?</p>
-		</div>
-    	<div class="modal-footer">
-    		<a href="{{ url('/deletenotification') . '/' . $id }}"><button type="button" class="btn btn-default">Yes</button></a>
-			<button type="button" class="btn btn-default" data-dismiss="modal">No</button>
-    	</div>
-    </div>
-
-  </div>
-</div>
 @endsection

@@ -45,6 +45,7 @@ class VisitorNotificationController extends Controller
 	public function userViewSubmittedNotifications(){
 		$visitors = Visitor::select('id', 'visitor_name', 'reason_for_visit', 'time_expected', 'time_arrived', 'visitor_code')
 					->where('submitted_by', '=', Auth::id())
+					->where('is_active', '=', 1)
 					->get();
 
 		return view('submittednotifications')->with('visitors', $visitors);
@@ -74,8 +75,12 @@ class VisitorNotificationController extends Controller
 	}
 
 	public function userDeleteNotification($id){
-		$visitor = Visitor::where('id', $id)
-					->update(['is_active' => 0]);
+
+		$visitor = Visitor::find($id);
+
+		$visitor->is_active = 0;
+
+		$visitor->update();
 
 		return redirect('userviewnotifications');
 	}

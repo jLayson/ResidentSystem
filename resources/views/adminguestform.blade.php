@@ -59,13 +59,13 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
+                        <!-- <div class="form-group">
                             <label for="radio" class="col-md-4 control-label">Has Sticker</label>
                             <div class="radio">
                                 <label><input type="radio" name="has_sticker" value="1">Yes</label>
                                 <label><input type="radio" name="has_sticker" value="0">No</label>
                             </div>
-                        </div>
+                        </div> -->
 
                         <div class="form-group">
                             <label for="person_to_visit" class="col-md-4 control-label">Person to Visit</label>
