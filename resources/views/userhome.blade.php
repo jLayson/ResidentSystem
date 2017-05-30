@@ -3,7 +3,8 @@
 @section('content')
 
 <style type="text/css">
-    td {
+    .table > tbody > tr > td {
+        vertical-align: middle;
         text-align: center;
     }
 </style>
@@ -61,8 +62,10 @@
                                 <td>{{ $visitor->visitor_code }}</td>
                                 <td>
                                     @if(strtotime($visitor->time_expected) > $now)
-                                        <a href="/editnotification/{{ $visitor->id }}"><button type="button" class="btn btn-info btn-block">Edit</button></a>
-                                        <button type="button" class="btn btn-info btn-block" data-toggle="modal" data-target="#deleteModal">Delete</button>
+                                    <div class="btn-group" role="group">
+                                        <button type="button" class="btn btn-primary"><a href="/editnotification/{{ $visitor->id }}">Edit</a></button>
+                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#deleteModal">Delete</button>
+                                    </div>
                                     @endif
                                 </td>
                             </tr>
