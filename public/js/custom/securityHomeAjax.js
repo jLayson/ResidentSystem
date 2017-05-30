@@ -35,7 +35,20 @@ $(window).load(function(){
             url: submitNotificationUrl,
             data: postData,
             success: function(result){
-              $('#successnotification').toggle();
+                $('#successnotification').toggle();
+                
+                $('#name_first').attr('value', '');
+                $('#name_middle').attr('value', '');  
+                $('#name_last').attr('value', '');  
+
+                $('#reason').attr('value', '');  
+                $('#vehicle_plate').attr('value', ''); 
+
+                window.setTimeout(function() {
+                    $('#successnotification').toggle();
+                }, 4000);
+
+
             }
        });
     });

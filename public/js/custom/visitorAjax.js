@@ -5,7 +5,6 @@ $(document).ready(function(){
         }
     })
 
-
     var php_url = "/ajaxgetvisitors";
 
     $('#dateStart').datepicker({
@@ -19,7 +18,7 @@ $(document).ready(function(){
         var startDate = $('#dateStart').val();
         var endDate = $('#dateEnd').val();
 
-        var searchParam = $('#searchParam').val();
+        var searchParam = $('#searchParam').val(;
         
         var postData = {
             "dateStart": startDate,

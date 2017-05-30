@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Visitor;
 use App\Resident;
+use App\Guest;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -194,7 +195,7 @@ class VisitorNotificationController extends Controller
 
 
 	public function getSecurityHome(){
-		$now = date('Y-m-d h:i:s');
+		$now = date('Y-m-d');
 
 		$residents = Resident::get();
 
@@ -207,7 +208,15 @@ class VisitorNotificationController extends Controller
 					->orderBy('created_at', 'desc')
 					->get();
 
-		return view('securityhomepage')->with('visitors', $visitors)->with('residents', $residents);	
+		$guests = Guest::leftjoin('residents', 'guests.person_to_visit', 'residents.id')
+						->where('is_active', 1)
+						->where([
+							['guests.created_at', '>', $now]
+						])
+						->select('guests.*', 'residents.name_first', 'residents.name_middle', 'residents.name_last')
+						->get();
+
+		return view('securityhomepage')->with('visitors', $visitors)->with('residents', $residents)->with('guests', $guests);	
 	}
 
 	public function ajaxVisitorTable(){

@@ -103,4 +103,21 @@ class GuestController extends Controller
 		$guest = Guest::create($data);
 	}
 
+	public function ajaxGuestTable(){
+		$now = date('Y-m-d h:i:s');
+
+		$returndata = "";
+
+		$guests = Guest::leftjoin('residents', 'guests.person_to_visit', 'residents.id')
+						->where('is_active', 1)
+						->select('guests.*', 'residents.name_first', 'residents.name_middle', 'residents.name_last')
+						->orderBy('created_at', 'desc')
+						->get();
+
+		foreach($guests as $guest){
+			$guest['created_at'] = date('m-d-Y h:i:s', strtotime($guest['created_at']))
+
+		}
+	}
+
 }
