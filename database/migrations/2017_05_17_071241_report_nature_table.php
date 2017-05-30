@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use App\ReportNature;
 
 class ReportNatureTable extends Migration
 {
@@ -18,6 +19,18 @@ class ReportNatureTable extends Migration
             $table->string('nature_name');
             $table->timestamps();
         });
+
+        ReportNature::create([
+            'nature_name' => 'Tresspassing',
+        ]);
+
+        ReportNature::create([
+            'nature_name' => 'Disturbance of Peace',
+        ]);
+
+        ReportNature::create([
+            'nature_name' => 'Suspicious Person',
+        ]);
     }
 
     /**
