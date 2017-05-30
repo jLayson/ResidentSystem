@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+<div class="container-fluid">
 <div class="row">
     <div class="col-md-4">
             {{ csrf_field() }}
@@ -84,7 +85,7 @@
     </div>
 
     <div class="col-md-8">
-        <table class="table table-bordered table-striped" id="datatable">
+        <table class="table table-bordered table-striped datatable" id="datatable">
             <thead>
                 <tr>
                     <td>Name</td>
@@ -193,28 +194,25 @@
                     </div>
                 </div>
             </div>
-        </div>
 
 @endforeach
         </tbody>
     </table>
 </div>
-
 </div>
-
 @php
     $now = strtotime(date('Y-m-d h:i:s'));
 @endphp
 
     
-</div>
+
 
 <br><br>
 
 <div class="row">
     <div class="col-md-6">
 
-        <table class="table table-bordered table-striped" id="datatable">
+        <table class="table table-bordered table-striped datatable" id="datatable">
             <thead>
                 <tr>
                     <td>Submitted By</td>
@@ -237,7 +235,7 @@
                         <td>{{ $visitor->time_expected }}
     
                         <td>{{ $visitor->visitor_code }}</td>
-                        <td class="col-md-1">
+                        <td>
                             @if((strtotime($visitor->time_expected) > $now) && ($visitor->time_arrived == null))
                                 <a href="/verifynotification/{{$id}}"><button type="button" class="btn btn-info btn-block">Verify</button></a>
                             @endif
@@ -249,7 +247,7 @@
     </div>
 
     <div class="col-md-6">
-            <table class="table table-bordered table-striped" id="datatable">
+            <table class="table table-bordered table-striped datatable" id="datatable">
                 <thead>
                     <tr>
                     <td>Report Nature</td>
@@ -272,6 +270,7 @@
             </tbody>
         </table>
     </div>
+</div>
 </div>
 
 @endsection

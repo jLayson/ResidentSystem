@@ -50,7 +50,7 @@
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
-                        &nbsp;
+                        &nbsp
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -59,7 +59,36 @@
                         @if (Auth::guest())
                             <li><a href="{{ url('/login') }}">Login</a></li>
                             <li><a href="{{ url('/register') }}">Register</a></li>
-                        @else
+                        @elseif(Auth::user()->account_type == 0)
+                            <li><a href="{{ url('/viewprofile') }}">My Profile</a></li>
+                            <li><a href="{{ url('/filereport') }}">File Report</a></li>
+                            <li><a href="{{ url('/userviewreports') }}">My Reports</a></li>
+                            <li><a href="{{ url('/filevisitornotification') }}">Submit Visitor Notification</a></li>
+                            <li><a href="{{ url('/userviewnotifications') }}">My Visitor Notifications</a></li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                    {{ Auth::user()->name }} <span class="caret"></span>
+                                </a>
+
+                                <ul class="dropdown-menu" role="menu">
+                                    <li>
+                                        <a href="{{ url('/logout') }}"
+                                            onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                            Logout
+                                        </a>
+
+                                        <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
+                                            {{ csrf_field() }}
+                                        </form>
+                                    </li>
+                                </ul>
+                            </li>
+                        @elseif(Auth::user()->account_type == 2)
+                            <li><a href="#">Residents</a></li>
+                            <li><a href="#">Reports</a></li>
+                            <li><a href="#">Visitor Notifications</a></li>
+                            <li><a href="#">Guests</a></li>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                     {{ Auth::user()->name }} <span class="caret"></span>
@@ -85,7 +114,9 @@
             </div>
         </nav>
 
+        @yield('navbar')
         @yield('content')
+    
     </div>
 
     <!-- Scripts -->
@@ -105,7 +136,7 @@
 
     $(document).ready(function(){
 
-        $('#datatable').DataTable({
+        $('table.datatable').DataTable({
             "searching" : false,
             "lengthChange": false
         });

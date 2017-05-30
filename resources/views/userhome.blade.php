@@ -10,17 +10,6 @@
 </style>
 
 <div class="container">
-    <nav class="navbar navbar-toggleable-md navbar-dark bg-primary">
-        <div class="container-fluid">
-            <ul class="nav navbar-nav">
-                <li><a href="{{ url('/viewprofile') }}">My Profile</a></li>
-                <li><a href="{{ url('/filereport') }}">File Report</a></li>
-                <li><a href="{{ url('/userviewreports') }}">My Reports</a></li>
-                <li><a href="{{ url('/filevisitornotification') }}">Submit Visitor Notification</a></li>
-                <li><a href="{{ url('/userviewnotifications') }}">My Visitor Notifications</a></li>
-            </ul>
-        </div>
-    </nav>
 
 @php
     $now = strtotime(date('Y-m-d h:i:s'));
@@ -63,8 +52,8 @@
                                 <td>
                                     @if(strtotime($visitor->time_expected) > $now)
                                     <div class="btn-group" role="group">
-                                        <button type="button" class="btn btn-primary"><a href="/editnotification/{{ $visitor->id }}">Edit</a></button>
-                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#deleteModal">Delete</button>
+                                        <button type="button" class="btn btn-primary btn-sm"><a href="/editnotification/{{ $visitor->id }}" style="color:#FFFFFF">Edit</a></button>
+                                        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#deleteModal">Delete</button>
                                     </div>
                                     @endif
                                 </td>
