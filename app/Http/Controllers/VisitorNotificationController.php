@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Visitor;
 use App\Resident;
 use App\Guest;
+use App\Report;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -216,7 +217,14 @@ class VisitorNotificationController extends Controller
 						->select('guests.*', 'residents.name_first', 'residents.name_middle', 'residents.name_last')
 						->get();
 
-		return view('securityhomepage')->with('visitors', $visitors)->with('residents', $residents)->with('guests', $guests);	
+		$reports = Report::join('report_natures', 'report_natures.id', '=', 'reports.report_nature')
+					->join('residents', 'residents.user_id', '=', 'reports.submitted_by')
+					->select('name_first', 'name_middle', 'name_last', 'report_natures.nature_name', 'reports.description', 'reports.location', 'reports.created_at')
+					//->where('reports.created_at', '>', $now)
+					->orderBy('created_at', 'desc')
+					->get();
+
+		return view('securityhomepage')->with('visitors', $visitors)->with('residents', $residents)->with('guests', $guests)->with('reports', $reports);	
 	}
 
 	public function ajaxVisitorTable(){

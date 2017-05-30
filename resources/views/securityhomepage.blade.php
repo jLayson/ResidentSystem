@@ -209,6 +209,8 @@
     
 </div>
 
+<br><br>
+
 <div class="row">
     <div class="col-md-6">
 
@@ -240,6 +242,31 @@
                                 <a href="/verifynotification/{{$id}}"><button type="button" class="btn btn-info btn-block">Verify</button></a>
                             @endif
                         </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
+
+    <div class="col-md-6">
+            <table class="table table-bordered table-striped" id="datatable">
+                <thead>
+                    <tr>
+                    <td>Report Nature</td>
+                    <td>Description</td>
+                    <td>Location</td>
+                    <td>Time Submitted</td>
+                    <td>Submitted By</td>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($reports as $report)
+                    <tr>
+                        <td>{{ $report->nature_name }}</td>
+                        <td>{{ $report->description }}</td>
+                        <td>{{ $report->location }}</td>
+                        <td>{{ $report->created_at }}</td>
+                        <td>{{ $report->name_first . " " . $report->name_middle . " "  . $report->name_last}}</td>
                     </tr>
                 @endforeach
             </tbody>
