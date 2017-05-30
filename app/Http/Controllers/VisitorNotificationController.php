@@ -39,7 +39,7 @@ class VisitorNotificationController extends Controller
 
 		$visitor->create($data);
 
-		return redirect('userviewnotifications');
+		return redirect('userhomepageredirect');
 	}
 
 	public function userViewSubmittedNotifications(){
@@ -182,6 +182,16 @@ class VisitorNotificationController extends Controller
 
 		return $returndata;
 	}
+
+	public function userHomepageRedirect(){
+		$visitors = Visitor::select('id', 'visitor_name', 'reason_for_visit', 'time_expected', 'time_arrived', 'visitor_code')
+					->where('submitted_by', '=', Auth::id())
+					->where('is_active', '=', 1)
+					->get();
+
+		return view('userhome')->with('visitors', $visitors);
+	}
+
 
 	public function getSecurityHome(){
 		$now = date('Y-m-d h:i:s');

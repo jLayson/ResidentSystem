@@ -15,7 +15,7 @@ Route::get('/', function () {
 	if(Auth::guest()){
 		return view('welcome');
 	}elseif(Auth::user()->account_type == 0){
-		return view('userhome');
+		return redirect('userhomepageredirect');
 	}elseif(Auth::user()->account_type == 1){
 		return view('securityhome');	
 	} elseif (Auth::user()->account_type == 2) {
@@ -28,7 +28,7 @@ Auth::routes();
 // User auth intercept
 Route::get('/home', function () {
 	if(Auth::user()->account_type == 0){
-		return view('userhome');
+		return redirect('userhomepageredirect');
 	}elseif(Auth::user()->account_type == 1){
 		return view('securityhome');
 	}elseif(Auth::user()->account_type == 2){
@@ -36,6 +36,7 @@ Route::get('/home', function () {
 	}
 });
 
+Route::get('/userhomepageredirect', 'VisitorNotificationController@userHomepageRedirect');
 Route::get('/securityhomepageredirect', 'VisitorNotificationController@getSecurityHome');
 
 // Resident /profile actions

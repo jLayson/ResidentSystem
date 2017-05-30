@@ -17,6 +17,8 @@
     <link href="{{ URL::asset('css/bootstrap-timepicker.css') }}" rel="stylesheet">
     <!-- Datatables Styles -->
     <link href="{{ URL::asset('datatable/jquery.dataTables.min.css') }}" rel="stylesheet">
+
+    <link href="{{ URL::asset('MDB/css/mdb.min.css') }}" rel="stylesheet">
     
     <!-- Scripts -->
     <script>
@@ -27,7 +29,7 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-default navbar-static-top">
+        <nav class="navbar navbar-toggleable-md navbar-dark bg-primary navbar-static-top">
             <div class="container">
                 <div class="navbar-header">
 
@@ -97,12 +99,15 @@
     <script src="{{ URL::asset('datatable/jquery.dataTables.min.js') }}"></script>
     <script src="{{ URL::asset('datatable/moment.js') }}"></script>
 
+    <script src="{{ URL::asset('MDB/js/mdb.min.js') }}"></script>
+
 <script type="text/javascript">
 
     $(document).ready(function(){
 
         $('#datatable').DataTable({
-            "searching" : false
+            "searching" : false,
+            "lengthChange": false
         });
         
         //Table ID for DataTable
