@@ -64,6 +64,7 @@
 	</div>
 
 		<div class="col-md-9">
+			<table class="table table-bordered table-striped" id="dataTableV2">
 				<thead>
 					<tr>
 						<td>Report Nature</td>

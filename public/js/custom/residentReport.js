@@ -6,6 +6,7 @@ $(window).load(function(){
         }
     })
 
+    var reportTable = "/ajaxresidentreports";
     var submitReport = "/ajaxreportsubmit";
 
     //SUBMIT GUEST REGISTRATION
