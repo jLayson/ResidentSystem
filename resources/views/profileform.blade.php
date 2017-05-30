@@ -10,7 +10,7 @@
 
 @endphp
 
-<div class="container">
+<!-- <div class="container-fluid">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
@@ -23,7 +23,7 @@
 
                             <label for="avatar" class="col-md-4 control-label">Profile Image</label>
                             <div class="col-md-6">
-                            <img src="{{ asset('storage/avatars/'.$res->avatar) }}" width="100px" height="100px">
+                            
                                 <input id="avatar" type="file" class="form-control" name="avatar" value="public/avatars/{{ $res->avatar }}" autofocus>
                             </div>
 
@@ -106,7 +106,128 @@
             </div>
         </div>
     </div>
+</div> -->
+
+<div class="container-fluid" style="padding-top:50px;">
+    <div class="row" >
+        <div class="col-md-8 col-md-offset-2">
+            <div class="panel panel-default">
+                <div class="panel-heading">Edit Profile</div>
+                <div class="panel-body">
+                    <form class="form-horizontal" enctype="multipart/form-data" role="form" method="POST" action="{{ url('/editprofile') }}">
+                        {{ csrf_field() }}
+
+                        <div class="row">
+
+                            <div class="col-md-2">
+                                @if($res->avatar == null)
+                                    <img src="{{ asset('storage/avatars/default.png') }}" width="200px" height="200px" style="padding-left: 15px;">
+                                @else
+                                    <img src="{{ asset('storage/avatars/'.$res->avatar) }}" width="200px" height="200px" style="padding-left: 15px;">
+                                @endif
+                            </div>
+
+
+                            <div class="col-md-5">
+                                <div class="form-group">
+                                <label for="avatar" class="col-md-4 control-label">Profile Image</label>
+                                    <div class="col-md-6">
+                                        <input id="avatar" type="file" class="form-control" name="avatar" value="public/avatars/{{ $res->avatar }}" autofocus>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                <label for="name_first" class="col-md-4 control-label">First Name</label>
+                                    <div class="col-md-6">
+                                        <input id="name_first" type="text" class="form-control" name="name_first" value="{{ $res->name_first }}" required autofocus>
+
+                                        @if ($errors->has('first_name'))
+                                            <span class="help-block">
+                                                <strong>{{ $errors->first('first_name') }}</strong>
+                                            </span>
+                                        @endif
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="name_middle" class="col-md-4 control-label">Middle Name</label>
+                                    <div class="col-md-6">
+                                        <input id="name_middle" type="text" class="form-control" name="name_middle" value="{{ $res->name_middle }}" required autofocus>
+
+                                        @if ($errors->has('middle_name'))
+                                            <span class="help-block">
+                                                <strong>{{ $errors->first('middle_name') }}</strong>
+                                            </span>
+                                        @endif
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="last" class="col-md-4 control-label">Last Name</label>
+                                    <div class="col-md-6">
+                                        <input id="name_last" type="text" class="form-control" name="name_last" value="{{ $res->name_last }}" required autofocus>
+
+                                        @if ($errors->has('last_name'))
+                                            <span class="help-block">
+                                                <strong>{{ $errors->first('last_name') }}</strong>
+                                            </span>
+                                        @endif
+                                    </div>
+                                </div>
+                            
+                            </div>
+
+                            <div class="col-md-5">
+                                <div class="form-group">
+                                    <label for="address" class="col-md-4 control-label">Address</label>
+
+                                    <div class="col-md-6">
+                                        <textarea  id="address" type="text" class="form-control" name="address" required autofocus>{{ $res->address }}</textarea>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="number_home" class="col-md-4 control-label">Home Number</label>
+
+                                    <div class="col-md-6">
+                                        <input id="number_home" type="text" class="form-control" name="number_home" value="{{ $res->number_home }}">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="number_mobile" class="col-md-4 control-label">Mobile Number</label>
+
+                                    <div class="col-md-6">
+                                        <input id="number_mobile" type="text" class="form-control" name="number_mobile" value="{{ $res->number_mobile }}">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="birth_date" class="col-md-4 control-label">Birth Date</label>
+
+                                    <div class="col-md-6">
+                                        <input class="datepicker form-control" type="text" name="birth_date" value="{{ $res->birth_date }}" required />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-2 col-md-offset-5">
+                                <button type="submit" class="btn btn-primary">
+                                    Submit
+                                </button>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+
+
 
 @endforeach
 @endsection

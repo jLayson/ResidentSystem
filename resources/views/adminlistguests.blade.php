@@ -6,7 +6,7 @@
 
 	<div class="row">
 		<div class="col-md-10 col-md-offset-1">
-			<table class="table table-bordered table-striped" id="datatable">
+			<table class="table table-bordered table-striped datatable" id="datatable">
 				<thead>
 					<tr>
 						<td>Name</td>

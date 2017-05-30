@@ -17,7 +17,7 @@ Route::get('/', function () {
 	}elseif(Auth::user()->account_type == 0){
 		return redirect('userhomepageredirect');
 	}elseif(Auth::user()->account_type == 1){
-		return view('securityhome');	
+		return redirect('securityhomepageredirect');	
 	} elseif (Auth::user()->account_type == 2) {
 		return redirect('securityhomepageredirect');
 	}
@@ -30,7 +30,7 @@ Route::get('/home', function () {
 	if(Auth::user()->account_type == 0){
 		return redirect('userhomepageredirect');
 	}elseif(Auth::user()->account_type == 1){
-		return view('securityhome');
+		return redirect('securityhomepageredirect');
 	}elseif(Auth::user()->account_type == 2){
 		return redirect('securityhomepageredirect');	
 	}
@@ -100,3 +100,10 @@ Route::get('/ajaxsecuritynotification', 'VisitorNotificationController@ajaxVisit
 Route::get('/ajaxsecurityreports', 'ReportController@ajaxReportTable');
 Route::get('/ajaxsecurityguests', 'GuestController@ajaxGuestTable');
 Route::post('/ajaxsecuritysubmit', 'GuestController@addGuestAjax');
+
+//Resident Report AJAX
+Route::post('/ajaxreportsubmit', 'ReportController@fileReportAJAX');
+Route::get('/ajaxresidentreports', 'ReportController@residentReportTable');
+
+/*Route::post('/ajaxvisitorsubmit', 'VisitorNotificationController@residentAddVisitorAJAX');
+Route::get('/ajaxgetvisitors', 'VisitorNotificationController@residentGetVisitorAJAX');*/

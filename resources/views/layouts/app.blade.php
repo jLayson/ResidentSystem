@@ -43,7 +43,7 @@
 
                     <!-- Branding Image -->
                     <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'Laravel') }}
+                        {{ config('app.name', 'Resident System') }}
                     </a>
                 </div>
 
@@ -61,10 +61,30 @@
                             <li><a href="{{ url('/register') }}">Register</a></li>
                         @elseif(Auth::user()->account_type == 0)
                             <li><a href="{{ url('/viewprofile') }}">My Profile</a></li>
-                            <li><a href="{{ url('/filereport') }}">File Report</a></li>
-                            <li><a href="{{ url('/userviewreports') }}">My Reports</a></li>
+                            <!-- <li><a href="{{ url('/filereport') }}">File Report</a></li> -->
+                            <li><a href="{{ url('/userviewreports') }}">Reports</a></li>
                             <li><a href="{{ url('/filevisitornotification') }}">Submit Visitor Notification</a></li>
-                            <li><a href="{{ url('/userviewnotifications') }}">My Visitor Notifications</a></li>
+                            <!-- <li><a href="{{ url('/userviewnotifications') }}">My Visitor Notifications</a></li> -->
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                    {{ Auth::user()->name }} <span class="caret"></span>
+                                </a>
+
+                                <ul class="dropdown-menu" role="menu">
+                                    <li>
+                                        <a href="{{ url('/logout') }}"
+                                            onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                            Logout
+                                        </a>
+
+                                        <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
+                                            {{ csrf_field() }}
+                                        </form>
+                                    </li>
+                                </ul>
+                            </li>
+                        @elseif(Auth::user()->account_type == 1)
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                     {{ Auth::user()->name }} <span class="caret"></span>
@@ -141,6 +161,16 @@
 <script type="text/javascript">
 
     $(document).ready(function(){
+
+        $('#dataTableV2').DataTable({
+            "fixedHeader": true,
+            "searching" : false,
+            "lengthChange": false,
+            "scrollY": "500px",
+            "scrollCollapse": true,
+            "info": false,
+            "paging": false
+        });
 
         $('table.datatable').DataTable({
             "searching" : false,

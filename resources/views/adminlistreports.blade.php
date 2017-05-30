@@ -16,7 +16,7 @@
     			<input class="datepicker range-filter" type="text" id="endDate" readonly="End Date" required/>
 			</div> -->
 
-			<table class="table table-bordered table-striped" id="datatable">
+			<table class="table table-bordered table-striped datatable" id="datatable">
 				<thead>
 					<tr>
 						<td>Report Nature</td>

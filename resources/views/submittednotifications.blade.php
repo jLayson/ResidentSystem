@@ -2,6 +2,13 @@
 
 @section('content')
 
+<style type="text/css">
+    .table > tbody > tr > td {
+        vertical-align: middle;
+        text-align: center;
+    }
+</style>
+
 @php
 	$now = strtotime(date('Y-m-d h:i:s'));
 @endphp
@@ -10,7 +17,7 @@
 
 	<div class="row">
 		<div class="col-md-10 col-md-offset-1">
-			<table class="table table-bordered table-striped" id="datatable">
+			<table class="table table-bordered table-striped datatable" id="datatable">
 				<thead>
 					<tr>
 						<td>Visitor Name</td>
@@ -43,8 +50,10 @@
 							<td>{{ $visitor->visitor_code }}</td>
 							<td>
 								@if(strtotime($visitor->time_expected) > $now)
-									<a href="/editnotification/{{ $visitor->id }}"><button type="button" class="btn btn-info btn-block">Edit</button></a>
-									<button type="button" class="btn btn-info btn-block" data-toggle="modal" data-target="#deleteModal">Delete</button>
+									<div class="btn-group" role="group">
+										<button type="button" class="btn btn-primary btn-sm"><a href="/editnotification/{{ $visitor->id }}" style="color:#FFFFFF">Edit</a></button>
+										<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#deleteModal">Delete</button>
+									</div>
 								@endif
 							</td>
 						</tr>

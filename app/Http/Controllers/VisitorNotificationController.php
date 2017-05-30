@@ -73,7 +73,7 @@ class VisitorNotificationController extends Controller
 		Visitor::where('id', $data["id"])
 				->update($data);
 
-		return redirect('userviewnotifications');
+		return redirect('userhomepageredirect');
 	}
 
 	public function userDeleteNotification($id){
@@ -261,4 +261,65 @@ class VisitorNotificationController extends Controller
 
 		return $returndata;
 	}
+
+	//AJAX add visitor
+/*	public function residentAddVisitorAJAX(Request $request){
+		$visitor = new Visitor();
+
+		$time = $request->input('time_expected');
+		$date = $request->input('date_expected');
+		$timeDate = date('Y-m-d', strtotime($date)) . " " . date('h:i:s', strtotime($time));
+
+		$visitor->submitted_by = Auth::id();
+		$visitor->visitor_name = $request->input('visitor_name');
+		$visitor->reason_for_visit = $request->input('reason_for_visit');
+		$visitor->time_expected = $timeDate;
+		
+
+			$user = Resident::where('user_id', '=', Auth::id())
+							->get();
+
+			$initals;
+
+			foreach($user as $u){
+				$f = substr($u->name_first, 0, 1);
+				$m = substr($u->name_middle, 0, 1);
+				$l = substr($u->name_last, 0, 1);
+
+				$initials = $f[0] . $m[0] . $l[0];
+			}
+
+			$visitor->visitor_code = date('ymdhi') . $initials;
+
+		$visitor->save();
+	}*/
+/*
+	public function residentGetVisitorAJAX(){
+
+		$visitors = Visitor::select('id', 'visitor_name', 'reason_for_visit', 'time_expected', 'time_arrived', 'visitor_code')
+					->where('submitted_by', '=', Auth::id())
+					->where('is_active', '=', 1)
+					->get();
+
+		$returndata = "";
+
+		foreach($visitors as $visitor){
+
+			$button = "<div class='btn-group' role='group'>
+						<button type='button' class='btn btn-primary btn-sm'><a href='/editnotification/{{ $visitor->id }}' style='color:#FFFFFF'>Edit</a></button>
+						<button type='button' class='btn btn-primary btn-sm' data-toggle='modal' data-target='#deleteModal'>Delete</button>
+					</div>";
+
+			$returndata .= "<tr>
+                        		<td>" . $visitor->visitor_name . "</td>
+                       			<td>" . $visitor->reason_for_visit . "</td>
+                        		<td>" . $visitor->time_expected . "</td>
+                       		 	<td>" . $visitor->time_arrived . "</td>
+                       		 	<td>" . $visitor->visitor_code . "</td>
+                       		 	<td>" . $button . "</td>
+                    		</tr>";
+		}
+
+		return $returndata;
+	}*/
 }
