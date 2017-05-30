@@ -243,8 +243,8 @@ class VisitorNotificationController extends Controller
 
 		foreach($visitors as $visitor){
 			$name = $visitor->name_first . " " . $visitor->name_second . " " . $visitor->name_last;
-			$te = explode(" ", $visitor->time_expected);
 			$now = strtotime(date('Y-m-d h:i:s'));
+			$time_expected = date('m-d-Y h:i:s', strtotime($visitor->time_expected));
 
 			if((strtotime($visitor->time_expected) > $now) && ($visitor->time_arrived == null)){
 				$button = "<a href\"/verifynotification/{{ id }}\"><button type=\"button\" class=\"btn btn-info btn-block\">Verify</button></a>";
@@ -253,8 +253,7 @@ class VisitorNotificationController extends Controller
 			$returndata .= "<tr>
 								<td>" . $name . "</td>
 								<td>" . $visitor->visitor_name . "</td>
-								<td>" . $te[0] . "</td>
-								<td>" . $te[1] . "</td>
+								<td>" . $time_expected . "</td>
 								<td>" . $visitor->visitor_code . "</td>
 								<td>" . $button . "</td>
 							</tr>";

@@ -104,20 +104,55 @@ class GuestController extends Controller
 	}
 
 	public function ajaxGuestTable(){
-		$now = date('Y-m-d h:i:s');
+		$dnow = date('Y-m-d');
+		$resname = "";
+		$timedep;
+		$button = "";
 
 		$returndata = "";
 
 		$guests = Guest::leftjoin('residents', 'guests.person_to_visit', 'residents.id')
 						->where('is_active', 1)
+						->where('guests.created_at', '>', $dnow)
 						->select('guests.*', 'residents.name_first', 'residents.name_middle', 'residents.name_last')
 						->orderBy('created_at', 'desc')
 						->get();
 
 		foreach($guests as $guest){
-			$guest['created_at'] = date('m-d-Y h:i:s', strtotime($guest['created_at']))
+			$created_at = date('m-d-Y h:i:s', strtotime($guest->created_at));
 
-		}
+			if($guest->person_to_visit == 0)
+			{
+				$resname = "N/A";
+			}else{
+				$resname = $guest->name_first . " " . $guest->name_middle . " " . $guest->name_last;
+			}
+
+			if($guest->time_departed == null){
+				$timedep = "";
+			}else{
+				$timedep = date('m-d-Y h:i:s', strtotime($guest->time_departed));
+			}
+
+			if($timedep == ""){
+				$button = "<div class=\"btn-group\" role=\"group\">
+                                <button class=\"btn btn-default btn-sm\" id=\"btnDetails\" data-toggle=\"modal\" data-target=\"" . $guest->id . "\" data-backdrop=\"static\" data-keyboard=\"true\">Update</button>
+                                <button class=\"btn btn-default btn-sm\"><a href=\"/guestdeparture/" . $guest->id . "\" style=\"color:#E5E5E5\">Left</a></button>
+                            </div>";
+			}
+
+			$returndata .= "<tr>
+                        <td>" . $guest->name . "</td>
+                        <td>" . $guest->reason . "</td>
+                        <td>" . $resname . "</td>
+                        <td class=\"col-md-1\">" . $guest->vehicle_plate . "</td>
+                        <td class=\"col-md-1\">" . $created_at . "</td>
+                        <td class=\"col-md-1\">" . $timedep . "</td>
+                        <td>" . $button . "</td>
+                    </tr>";
+        }
+
+        return $returndata;
 	}
 
 }

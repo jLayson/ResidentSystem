@@ -7,6 +7,8 @@ $(window).load(function(){
     })
 
     var visitorTableUrl = "/ajaxsecuritynotification";
+    var reportTableUrl = "/ajaxsecurityreports";
+    var guestTableUrl = "/ajaxsecurityguests";
     var submitNotificationUrl = "/ajaxsecuritysubmit";
 
     //SUBMIT GUEST REGISTRATION
@@ -60,6 +62,20 @@ $(window).load(function(){
             url: visitorTableUrl,
             success: function(result){
                 $('#visitorTable').html(result);
+            }
+       });
+       $.ajax({
+            type: "GET",
+            url: reportTableUrl,
+            success: function(result){
+                $('#reportTable').html(result);
+            }
+       });
+       $.ajax({
+            type: "GET",
+            url: guestTableUrl,
+            success: function(result){
+                $('#guestTable').html(result);
             }
        });
     }, 5000);

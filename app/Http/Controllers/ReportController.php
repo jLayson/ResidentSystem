@@ -76,4 +76,31 @@ class ReportController extends Controller
 
 		return view('adminlistreports')->with('reports', $reports);
 	}
+
+	public function ajaxReportTable(){
+		$now = date('Y-m-d h:i:s');
+
+		$reports = Report::join('report_natures', 'report_natures.id', '=', 'reports.report_nature')
+					->join('residents', 'residents.user_id', '=', 'reports.submitted_by')
+					->select('name_first', 'name_middle', 'name_last', 'report_natures.nature_name', 'reports.description', 'reports.location', 'reports.created_at')
+					->where('reports.created_at', '>', $now)
+					->orderBy('created_at', 'desc')
+					->get();
+
+		$returndata = "";
+
+		foreach($reports as $report){
+			$time_submitted = date('m-d-Y h:i:s', $reports->created_at);
+
+			$returndata .= "<tr>
+                        		<td>" . $report->nature_name . "</td>
+                       			<td>" . $report->description . "</td>
+                        		<td>" . $report->location . "</td>
+                       		 	<td>" . $time_submitted . "</td>
+                        		<td>" . $report->name_first . " " . $report->name_middle . " " . $report->name_last . "</td>
+                    		</tr>";
+		}
+
+		return $returndata;
+	}
 }

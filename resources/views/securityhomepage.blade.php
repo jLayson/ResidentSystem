@@ -97,7 +97,7 @@
                     <td>Action</td>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="guestTable">
                 @foreach($guests as $guest)
                     <tr>
                         <td>{{ $guest->name }}</td>
@@ -257,7 +257,7 @@
                     <td>Submitted By</td>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="reportTable">
                 @foreach($reports as $report)
                     <tr>
                         <td>{{ $report->nature_name }}</td>

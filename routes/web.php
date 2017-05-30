@@ -97,4 +97,6 @@ Route::post('/ajaxgetvisitors', 'VisitorNotificationController@visitorGetAjax');
 
 //Security AJAX
 Route::get('/ajaxsecuritynotification', 'VisitorNotificationController@ajaxVisitorTable');
+Route::get('/ajaxsecurityreports', 'ReportController@ajaxReportTable');
+Route::get('/ajaxsecurityguests', 'GuestController@ajaxGuestTable');
 Route::post('/ajaxsecuritysubmit', 'GuestController@addGuestAjax');
