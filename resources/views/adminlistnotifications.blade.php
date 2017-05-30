@@ -10,7 +10,10 @@
 
 	<div class="row">
 		<div class="col-md-10 col-md-offset-1">
-			<button class="button-xsmall pure-button"><a href="{{ url('/export/visitor/notification') }}">Export to PDF</a></button>
+			
+			@if(Auth::user()->account_type == 1)
+				<button class="button-xsmall pure-button"><a href="{{ url('/export/visitor/notification') }}">Export to PDF</a></button>
+			@endif
 
 			<div class="input-group">
 				<input class="form-control datepicker range-filter" type="text" id="startDate" placeholder="Start Date" readonly="" required/>
@@ -66,7 +69,7 @@
 							<td>{{ $visitor->visitor_code }}</td>
 							<td>
 								@if((strtotime($visitor->time_expected) > $now) && ($visitor->time_arrived == null))
-									<a href="/verifynotification/{{$id}}"><button type="button" class="btn btn-info btn-block">Verify</button></a>
+									<a href="/verifynotification/{{$id}}"><button type="button" class="btn btn-info btn-block btn-sm">Verify</button></a>
 								@endif
 							</td>
 						</tr>

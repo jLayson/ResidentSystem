@@ -6,7 +6,9 @@
 	<div class="row">
 		<div class="col-md-10 col-md-offset-1">
 
+		@if(Auth::user()->account_type == 2)
 			<button class="button-xsmall pure-button"><a href="{{ url('/export/report') }}">Export to PDF</a></button>
+		@endif
 
 			<!-- <div class="input-group">
 				<input class="datepicker range-filter" type="text" id="startDate" placeholder="Start Date" readonly="" required/>

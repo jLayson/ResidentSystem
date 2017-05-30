@@ -19,7 +19,9 @@
 					</tr>
 				</thead>
 				<tbody>
-					<button class="button-xsmall pure-button"><a href="{{ url('/export/guest') }}">Export to PDF</a></button>
+					@if(Auth::user()->account_type == 2)
+						<button class="button-xsmall pure-button"><a href="{{ url('/export/guest') }}">Export to PDF</a></button>
+					@endif
 					@foreach($guests as $guest)
 						<tr>
 							<td>{{ $guest->name }}</td>
@@ -40,10 +42,12 @@
 							@endif
 							</td>
 							<td>
+								<div class="btn-group" role="group">
 								@if($guest->time_departed == "")
-									<button class="btn btn-default" id="btnDetails" data-toggle="modal" data-target="#{{$guest->id}}view" data-backdrop="static" data-keyboard="true">Update Details</button>
-									<button class="btn btn-default"><a href="/guestdeparture/{{ $guest->id }}">Confirm Departure</a></button>
+									<button class="btn btn-default btn-sm" id="btnDetails" data-toggle="modal" data-target="#{{$guest->id}}view" data-backdrop="static" data-keyboard="true">Update</button>
+									<button class="btn btn-default btn-sm"><a href="/guestdeparture/{{ $guest->id }}" style="color:#E5E5E5">Left</a></button>
 								@endif
+								</div>
 							</td>
 						</tr>
 
