@@ -56,7 +56,7 @@ $(window).load(function(){
        });
     });
 
-    $(".btn-lft").click(function() {
+    $("#guestTable").on('click', '.btn-lft', function() {
         var received_id = $(this).val();
 
         var postData = {
