@@ -20,6 +20,13 @@
 
     <link href="{{ URL::asset('MDB/css/mdb.min.css') }}" rel="stylesheet">
     
+    <style type="text/css">
+        .table > tbody > tr > td {
+            vertical-align: middle;
+            text-align: center;
+        }
+    </style>
+    
     <!-- Scripts -->
     <script>
         window.Laravel = <?php echo json_encode([

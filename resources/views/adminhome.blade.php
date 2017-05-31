@@ -2,13 +2,6 @@
 
 @section('content')
 
-<style type="text/css">
-    .table > tbody > tr > td {
-        vertical-align: middle;
-        text-align: center;
-    }
-</style>
-
 <div class="container">
 
     <div class="row">
