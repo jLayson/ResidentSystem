@@ -65,7 +65,7 @@
                         <!-- Authentication Links -->
                         @if (Auth::guest())
                             <li><a href="{{ url('/login') }}">Login</a></li>
-                            <li><a href="{{ url('/register') }}">Register</a></li>
+                            <!-- <li><a href="{{ url('/register') }}">Register</a></li> -->
                         @elseif(Auth::user()->account_type == 0)
                             <li><a href="{{ url('/viewprofile') }}">My Profile</a></li>
                             <!-- <li><a href="{{ url('/filereport') }}">File Report</a></li> -->
