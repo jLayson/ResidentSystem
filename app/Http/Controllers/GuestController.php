@@ -106,7 +106,7 @@ class GuestController extends Controller
 	public function ajaxGuestTable(){
 		$dnow = date('Y-m-d');
 		$resname = "";
-		$timedep;
+		$timedep = null;
 		$button = "";
 
 		$returndata = "";
@@ -129,12 +129,12 @@ class GuestController extends Controller
 			}
 
 			if($guest->time_departed == null){
-				$timedep = "";
+				
 			}else{
 				$timedep = date('m-d-Y h:i:s', strtotime($guest->time_departed));
 			}
 
-			if($timedep == ""){
+			if($timedep != null){
 				$button = "<div class=\"btn-group\" role=\"group\">
                                 <button class=\"btn btn-default btn-sm btn-lft\" id=\"leftButton\" name=\"leftButton\" value=\"" . $guest->id . "\">Left</button>
                             </div>";

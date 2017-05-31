@@ -194,6 +194,18 @@
             "searching" : false,
             "lengthChange": false
         });
+
+        $('#datatableGuest').DataTable({
+            "searching" : false,
+            "lengthChange": false,
+            "order": [[0, 'desc']]
+        });
+
+        $('#datatableNotif').DataTable({
+            "searching" : false,
+            "lengthChange": false,
+            "order": [[0, 'desc']]
+        });
         
         //Table ID for DataTable
         var table = $('#dateTableWithDateRange').DataTable();

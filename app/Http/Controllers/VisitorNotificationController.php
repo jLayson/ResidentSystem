@@ -215,6 +215,7 @@ class VisitorNotificationController extends Controller
 							['guests.created_at', '>', $now]
 						])
 						->select('guests.*', 'residents.name_first', 'residents.name_middle', 'residents.name_last')
+						->orderBy('created_at', 'desc')
 						->get();
 
 		$reports = Report::join('report_natures', 'report_natures.id', '=', 'reports.report_nature')

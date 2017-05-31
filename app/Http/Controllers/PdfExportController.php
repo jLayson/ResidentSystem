@@ -197,8 +197,8 @@ class PdfExportController extends Controller
     //Export Guests to PDF
     public function guestExport()
     {
-        $guest = Guest::join('residents', 'guests.person_to_visit', '=', 'user_id')
-                            ->select('guests.name', 'guests.reason', 'guests.person_to_visit', 'guests.vehicle_plate', 'guests.time_departed', 'guests.created_at', 'residents.name_first', 'residents.name_middle', 'residents.name_last')
+        $guest = Guest::leftjoin('residents', 'guests.person_to_visit', '=', 'residents.id')
+                            ->select('guests.*', 'guests.created_at', 'residents.name_first', 'residents.name_middle', 'residents.name_last')
                             ->where('is_active', 1)
                             ->get();
 

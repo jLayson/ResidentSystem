@@ -85,7 +85,7 @@
     </div>
 
     <div class="col-md-8">
-        <table class="table table-bordered table-striped datatable" id="datatable">
+        <table class="table table-bordered table-striped" id="datatableGuest">
             <thead>
                 <tr>
                     <td>Name</td>
@@ -211,7 +211,7 @@
 <div class="row">
     <div class="col-md-6">
 
-        <table class="table table-bordered table-striped datatable" id="datatable">
+        <table class="table table-bordered table-striped" id="datatableNotif">
             <thead>
                 <tr>
                     <td>Submitted By</td>
