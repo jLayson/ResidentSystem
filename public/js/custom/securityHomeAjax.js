@@ -11,6 +11,9 @@ $(window).load(function(){
     var guestTableUrl = "/ajaxsecurityguests";
     var submitNotificationUrl = "/ajaxsecuritysubmit";
 
+    var guestLeftUrl = "/ajaxguestleft";
+    var visitorverifyUrl = "/ajaxvisitorverify"
+
     //SUBMIT GUEST REGISTRATION
     $("#submitForm").click(function() {
         var name_first = $('#name_first').val();
@@ -39,21 +42,67 @@ $(window).load(function(){
             success: function(result){
                 $('#successnotification').toggle();
                 
-                $('#name_first').attr('value', '');
-                $('#name_middle').attr('value', '');  
-                $('#name_last').attr('value', '');  
+                $('#name_first').val('');
+                $('#name_middle').val('');  
+                $('#name_last').val('');  
 
-                $('#reason').attr('value', '');  
-                $('#vehicle_plate').attr('value', ''); 
+                $('#reason').val('');  
+                $('#vehicle_plate').val(''); 
 
                 window.setTimeout(function() {
                     $('#successnotification').toggle();
-                }, 4000);
-
-
+                }, 8000);
             }
        });
     });
+
+    $(".btn-lft").click(function() {
+        var received_id = $(this).val();
+
+        var postData = {
+            "user_id": received_id
+        }
+
+        $.ajax({
+            type: "POST",
+            data: postData,
+            url: guestLeftUrl,
+            success: function(result){
+                $.ajax({
+                    type: "GET",
+                    url: guestTableUrl,
+                    success: function(result){
+                        $('#guestTable').html(result);
+                    }
+                });
+            }
+        });
+    });
+
+    $(".btn-ver").click(function() {
+        var received_id = $(this).val();
+
+        var postData = {
+            "id": received_id
+        }
+
+        $.ajax({
+            type: "POST",
+            data: postData,
+            url: visitorverifyUrl,
+            success: function(result){
+                $.ajax({
+                    type: "GET",
+                    url: visitorTableUrl,
+                    success: function(result){
+                        $('#visitorTable').html(result);
+                    }
+                });
+            }
+        });
+    });
+
+    
 
     //GET TABLE DETAILS EVERY 5 SECS
     window.setInterval(function(){

@@ -247,7 +247,7 @@ class VisitorNotificationController extends Controller
 			$time_expected = date('m-d-Y h:i:s', strtotime($visitor->time_expected));
 
 			if((strtotime($visitor->time_expected) > $now) && ($visitor->time_arrived == null)){
-				$button = "<a href\"/verifynotification/{{ id }}\"><button type=\"button\" class=\"btn btn-info btn-block\">Verify</button></a>";
+				$button = "<button type=\"button\" class=\"btn btn-info btn-block btn-sm btn-ver\" value=\"" . $visitor->id . "\">Verify</button>";
 			}
 
 			$returndata .= "<tr>
@@ -260,6 +260,18 @@ class VisitorNotificationController extends Controller
 		}
 
 		return $returndata;
+	}
+
+	public function ajaxVerifyVisitor(Request $request){
+		$data = $request->input();
+		unset($data['_token']);
+
+		$now = date('Y-m-d h:i:s');
+
+		$visitor = Visitor::where('id', '=', $data['id'])
+						->update(['time_arrived' => $now]);
+
+		return var_dump($data);
 	}
 
 	//AJAX add visitor

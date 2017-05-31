@@ -120,8 +120,7 @@
                         <td>
                             @if($guest->time_departed == "")
                                 <div class="btn-group" role="group">
-                                    <button class="btn btn-default btn-sm" id="btnDetails" data-toggle="modal" data-target="#{{$guest->id}}view" data-backdrop="static" data-keyboard="true">Update</button>
-                                    <button class="btn btn-default btn-sm"><a href="/guestdeparture/{{ $guest->id }}" style="color:#E5E5E5">Left</a></button>
+                                    <button class="btn btn-default btn-sm btn-lft" id="leftButton" name="leftButton" value="{{ $guest->id }}">Left</button>
                                 </div>
                             @endif
                         </td>
@@ -182,7 +181,7 @@
                                     
                                 <div class="form-group row">        
                                     <div class="text-center">
-                                        <button type="submit" class="btn btn-primary">Update</button>
+                                        <button type="submit" class="btn btn-primary btn-sm">Update</button>
                                     </div>
                                 </div>
 
@@ -237,7 +236,7 @@
                         <td>{{ $visitor->visitor_code }}</td>
                         <td>
                             @if((strtotime($visitor->time_expected) > $now) && ($visitor->time_arrived == null))
-                                <a href="/verifynotification/{{$id}}"><button type="button" class="btn btn-info btn-block">Verify</button></a>
+                                <button type="button" class="btn btn-info btn-block btn-sm btn-ver" id="{{ $visitor->id }}">Verify</button>
                             @endif
                         </td>
                     </tr>

@@ -21,7 +21,11 @@
 					@foreach($residents as $resident)
 						
 						<tr>
-							<td><a href="/adminviewprofile/{{$resident->id}}"><img src="{{ asset('storage/avatars/'.$resident->avatar) }}" width="100px" height="100px" align="center"></a></td>
+							@if($resident->avatar == null)
+								<td><a href="/adminviewprofile/{{$resident->id}}"><img src="{{ asset('storage/avatars/default.jpeg') }}" width="100px" height="100px" align="center"></a></td>
+							@else
+								<td><a href="/adminviewprofile/{{$resident->id}}"><img src="{{ asset('storage/avatars/'.$resident->avatar) }}" width="100px" height="100px" align="center"></a></td>
+							@endif
 							<td><a href="/adminviewprofile/{{$resident->id}}">{{ $resident->name_first }} {{ $resident->name_middle }} {{ $resident->name_last }}</a></td>
 							<td><a href="/adminviewprofile/{{$resident->id}}">{{ $resident->address }}</a></td>
 							<td><a href="/adminviewprofile/{{$resident->id}}">{{ $resident->number_mobile }}</a></td>
