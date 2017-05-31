@@ -110,7 +110,7 @@
 
 <div class="container-fluid" style="padding-top:50px;">
     <div class="row" >
-        <div class="col-md-8 col-md-offset-2">
+        <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default">
                 <div class="panel-heading">Edit Profile</div>
                 <div class="panel-body">
@@ -121,7 +121,7 @@
 
                             <div class="col-md-2">
                                 @if($res->avatar == null)
-                                    <img src="{{ asset('storage/avatars/default.png') }}" width="200px" height="200px" style="padding-left: 15px;">
+                                    <img src="{{ asset('storage/avatars/default.jpeg') }}" width="200px" height="200px" style="padding-left: 15px;">
                                 @else
                                     <img src="{{ asset('storage/avatars/'.$res->avatar) }}" width="200px" height="200px" style="padding-left: 15px;">
                                 @endif

@@ -52,8 +52,8 @@
                             <div class="col-md-6">
                                 <select id="account_type" name="account_type" class="form-control">
                                     <option value=0>Resident</option>
-                                    <option value=1>Security</option>
-                                    <option value=2>Admin</option>
+                                    <option value=1>Admin</option>
+                                    <option value=2>Security</option>
                                 </select> 
                             </div>
                         </div>

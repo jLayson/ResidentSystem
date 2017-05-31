@@ -85,6 +85,16 @@
                                 </ul>
                             </li>
                         @elseif(Auth::user()->account_type == 1)
+                            <li><a href="{{ url('/listprofiles') }}">Users</a></li>
+                            <li><a href="{{ url('/listreports') }}">Reports</a></li>
+                            <li><a href="{{ url('/listguests') }}">Guests</a></li>
+                            <li>
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Notifications<span class="caret"></span></a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="{{ url('/listnotifications') }}">View All</a></li>
+                                    <li><a href="{{ url('/listpending') }}">View Pending</a></li>
+                                </ul>
+                            </li>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                     {{ Auth::user()->name }} <span class="caret"></span>
@@ -166,7 +176,7 @@
             "fixedHeader": true,
             "searching" : false,
             "lengthChange": false,
-            "scrollY": "500px",
+            "scrollY": "400px",
             "scrollCollapse": true,
             "info": false,
             "paging": false

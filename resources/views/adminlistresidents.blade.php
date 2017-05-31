@@ -43,8 +43,6 @@
 		</div>
 	</div>
 
-	{{ $residents->render() }}
-
 </div>
 
 @endsection

@@ -17,7 +17,7 @@ Route::get('/', function () {
 	}elseif(Auth::user()->account_type == 0){
 		return redirect('userhomepageredirect');
 	}elseif(Auth::user()->account_type == 1){
-		return redirect('securityhomepageredirect');	
+		return redirect('adminhomepageredirect');	
 	} elseif (Auth::user()->account_type == 2) {
 		return redirect('securityhomepageredirect');
 	}
@@ -30,7 +30,7 @@ Route::get('/home', function () {
 	if(Auth::user()->account_type == 0){
 		return redirect('userhomepageredirect');
 	}elseif(Auth::user()->account_type == 1){
-		return redirect('securityhomepageredirect');
+		return redirect('adminhomepageredirect');
 	}elseif(Auth::user()->account_type == 2){
 		return redirect('securityhomepageredirect');	
 	}
@@ -38,6 +38,7 @@ Route::get('/home', function () {
 
 Route::get('/userhomepageredirect', 'VisitorNotificationController@userHomepageRedirect');
 Route::get('/securityhomepageredirect', 'VisitorNotificationController@getSecurityHome');
+Route::get('/adminhomepageredirect', 'ResidentProfileController@adminHomePage');
 
 // Resident /profile actions
 Route::get('/viewprofile', 'ResidentProfileController@userViewProfile');
