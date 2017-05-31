@@ -13,11 +13,11 @@
 
 Route::get('/', function () {
 	if(Auth::guest()){
-		return view('auth/login');
+		return view('welcome');
 	}elseif(Auth::user()->account_type == 0){
 		return redirect('userhomepageredirect');
 	}elseif(Auth::user()->account_type == 1){
-		return redirect('adminhomepageredirect');	
+		return redirect('securityhomepageredirect');	
 	} elseif (Auth::user()->account_type == 2) {
 		return redirect('securityhomepageredirect');
 	}
@@ -30,21 +30,14 @@ Route::get('/home', function () {
 	if(Auth::user()->account_type == 0){
 		return redirect('userhomepageredirect');
 	}elseif(Auth::user()->account_type == 1){
-		return redirect('adminhomepageredirect');
+		return redirect('securityhomepageredirect');
 	}elseif(Auth::user()->account_type == 2){
 		return redirect('securityhomepageredirect');	
 	}
 });
 
-Route::get('/registeruser', function() {
-	return view('registeruser');
-});
-
-Route::post('/adminregister', 'Auth\RegisterController@postRegister');
-
 Route::get('/userhomepageredirect', 'VisitorNotificationController@userHomepageRedirect');
 Route::get('/securityhomepageredirect', 'VisitorNotificationController@getSecurityHome');
-Route::get('/adminhomepageredirect', 'ResidentProfileController@adminHomePage');
 
 // Resident /profile actions
 Route::get('/viewprofile', 'ResidentProfileController@userViewProfile');
@@ -107,6 +100,8 @@ Route::get('/ajaxsecuritynotification', 'VisitorNotificationController@ajaxVisit
 Route::get('/ajaxsecurityreports', 'ReportController@ajaxReportTable');
 Route::get('/ajaxsecurityguests', 'GuestController@ajaxGuestTable');
 Route::post('/ajaxsecuritysubmit', 'GuestController@addGuestAjax');
+Route::post('/ajaxguestleft', 'GuestController@ajaxguestleft');
+Route::post('/ajaxvisitorverify', 'VisitorNotificationController@ajaxVerifyVisitor');
 
 //Resident Report AJAX
 Route::post('/ajaxreportsubmit', 'ReportController@fileReportAJAX');
