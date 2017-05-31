@@ -88,6 +88,7 @@
                             <li><a href="{{ url('/listprofiles') }}">Users</a></li>
                             <li><a href="{{ url('/listreports') }}">Reports</a></li>
                             <li><a href="{{ url('/listguests') }}">Guests</a></li>
+                            <li><a href="{{ url('/registeruser') }}">Register</a></li>
                             <li>
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Notifications<span class="caret"></span></a>
                                 <ul class="dropdown-menu" role="menu">
