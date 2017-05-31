@@ -33,8 +33,12 @@ class PdfExportController extends Controller
 						    border: 1px solid black;
 						    text-align: center;
 						}' .
+                        'h3 {
+                            text-align: center;
+                        }' .
 					'</style>' .
     				'<body>' .
+                        '<h3> Resident List </h3><br>' .
     					'<table align="center" style="margin: 0px auto;">' . 
     						'<thead>' .
     							'<tr>' .
@@ -90,8 +94,12 @@ class PdfExportController extends Controller
 						    border: 1px solid black;
 						    text-align: center;
 						}' .
+                        'h3 {
+                            text-align: center;
+                        }' .
 					'</style>' .
     				'<body>' .
+                        '<h3> Reports List </h3><br>' .
     					'<table>' . 
     						'<thead>' .
     							'<tr>' .
@@ -190,7 +198,8 @@ class PdfExportController extends Controller
     public function guestExport()
     {
         $guest = Guest::join('residents', 'guests.person_to_visit', '=', 'user_id')
-                            ->select('guests.*', 'guests.created_at', 'residents.name_first', 'residents.name_middle', 'residents.name_last')
+                            ->select('guests.name', 'guests.reason', 'guests.person_to_visit', 'guests.vehicle_plate', 'guests.time_departed', 'guests.created_at', 'residents.name_first', 'residents.name_middle', 'residents.name_last')
+                            ->where('is_active', 1)
                             ->get();
 
         $pdf = PDF::loadView('exporttopdf');

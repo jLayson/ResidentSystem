@@ -20,6 +20,13 @@
 
     <link href="{{ URL::asset('MDB/css/mdb.min.css') }}" rel="stylesheet">
     
+    <style type="text/css">
+        .table > tbody > tr > td {
+            vertical-align: middle;
+            text-align: center;
+        }
+    </style>
+    
     <!-- Scripts -->
     <script>
         window.Laravel = <?php echo json_encode([
@@ -58,7 +65,7 @@
                         <!-- Authentication Links -->
                         @if (Auth::guest())
                             <li><a href="{{ url('/login') }}">Login</a></li>
-                            <li><a href="{{ url('/register') }}">Register</a></li>
+                            <!-- <li><a href="{{ url('/register') }}">Register</a></li> -->
                         @elseif(Auth::user()->account_type == 0)
                             <li><a href="{{ url('/viewprofile') }}">My Profile</a></li>
                             <!-- <li><a href="{{ url('/filereport') }}">File Report</a></li> -->
@@ -85,6 +92,17 @@
                                 </ul>
                             </li>
                         @elseif(Auth::user()->account_type == 1)
+                            <li><a href="{{ url('/listprofiles') }}">Users</a></li>
+                            <li><a href="{{ url('/listreports') }}">Reports</a></li>
+                            <li><a href="{{ url('/listguests') }}">Guests</a></li>
+                            <li><a href="{{ url('/registeruser') }}">Register</a></li>
+                            <li>
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Notifications<span class="caret"></span></a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="{{ url('/listnotifications') }}">View All</a></li>
+                                    <li><a href="{{ url('/listpending') }}">View Pending</a></li>
+                                </ul>
+                            </li>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                     {{ Auth::user()->name }} <span class="caret"></span>
@@ -166,7 +184,7 @@
             "fixedHeader": true,
             "searching" : false,
             "lengthChange": false,
-            "scrollY": "500px",
+            "scrollY": "400px",
             "scrollCollapse": true,
             "info": false,
             "paging": false

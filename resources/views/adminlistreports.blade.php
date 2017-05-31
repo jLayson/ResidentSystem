@@ -2,11 +2,11 @@
 
 @section('content')
 
-<div class="container" onload="loadNow()">
+<div class="container-fluid">
 	<div class="row">
 		<div class="col-md-10 col-md-offset-1">
 
-		@if(Auth::user()->account_type == 2)
+		@if(Auth::user()->account_type == 1)
 			<button class="button-xsmall pure-button"><a href="{{ url('/export/report') }}">Export to PDF</a></button>
 		@endif
 
@@ -33,7 +33,7 @@
 							<td>{{ $report->description }}</td>
 							<td>{{ $report->location }}</td>
 							<td>{{ $report->created_at }}</td>
-							<td>{{ $report->submitted_by }}</td>
+							<td>{{ $report->name_first . " " . $report->name_middle . " " . $report->name_last }}</td>
 						</tr>
 					@endforeach
 				</tbody>

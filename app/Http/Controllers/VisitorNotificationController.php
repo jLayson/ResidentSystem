@@ -84,7 +84,7 @@ class VisitorNotificationController extends Controller
 
 		$visitor->update();
 
-		return redirect('userviewnotifications');
+		return redirect('userhomepageredirect');
 	}
 
 	public function adminViewAllNotifications(){

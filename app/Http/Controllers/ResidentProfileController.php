@@ -72,13 +72,20 @@ class ResidentProfileController extends Controller
 					->get();
 		$visitors = Visitor::where('visitors.submitted_by', '=', $userId)
 					->count();
+
+		$reports = Report::where('reports.submitted_by', '=', $userId)
+					->count();
+
 		$visitorspending = Visitor::where([
 										['visitors.submitted_by', '=', $userId],
 										['visitors.time_expected', '>', $now]
 									])
 									->count();
 
-		return view('adminviewresident')->with('resident', $resident)->with('visitors', $visitors)->with('visitorspending', $visitorspending);
+		return view('adminviewresident')->with('resident', $resident)
+		->with('visitors', $visitors)
+		->with('visitorspending', $visitorspending)
+		->with('reports', $reports);
 	}
 
 	public function adminViewListProfiles()
@@ -87,8 +94,19 @@ class ResidentProfileController extends Controller
 					->select('users.id',  'residents.name_first', 'residents.name_middle', 'residents.name_last',
 								'residents.address', 'residents.number_home', 'residents.number_mobile', 'residents.birth_date', 'residents.avatar')
 					->orderBy('residents.id', 'desc')
-					->paginate(10);
+					->get();
 
 		return view('adminlistresidents')->with('residents', $residents);
+	}
+
+	public function adminHomePage()
+	{
+		$residents = Resident::join('users', 'users.id', '=', 'residents.user_id')
+					->select('users.id',  'residents.name_first', 'residents.name_middle', 'residents.name_last',
+								'residents.address', 'residents.number_home', 'residents.number_mobile', 'residents.birth_date', 'residents.avatar')
+					->orderBy('residents.id', 'desc')
+					->get();
+
+		return view('adminhome')->with('residents', $residents);
 	}
 }

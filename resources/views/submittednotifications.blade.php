@@ -2,13 +2,6 @@
 
 @section('content')
 
-<style type="text/css">
-    .table > tbody > tr > td {
-        vertical-align: middle;
-        text-align: center;
-    }
-</style>
-
 @php
 	$now = strtotime(date('Y-m-d h:i:s'));
 @endphp

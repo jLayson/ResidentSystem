@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -36,7 +37,7 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest');
+        $this->middleware('guest', ['except' => ['postRegister']]);
     }
 
     /**
@@ -51,6 +52,20 @@ class RegisterController extends Controller
             'username' => 'required|max:255|unique:users',
             'password' => 'required|min:6|confirmed',
         ]);
+    }
+
+    public function postRegister(Request $request)
+    {
+        $validator = $this->validator($request->all());
+
+        if($validator->fails()) {
+            $this->throwValidationException($request, $validator);
+        }
+
+        $this->create($request->all());
+        $users = User::all();
+
+        return redirect('registeruser');
     }
 
     /**
