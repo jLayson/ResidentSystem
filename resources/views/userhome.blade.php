@@ -14,7 +14,7 @@
 
         <div class="col-md-10 col-md-offset-1">
 
-        <h4>Visitor's</h4>
+        <h4>Visitors</h4>
 
             <table class="table table-bordered table-striped datatable" id="datatable">
                 <thead>
